@@ -74,22 +74,25 @@ body { background: var(--bg); color: var(--text); font-family: 'Poppins', sans-s
 .theme-toggle:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.5); color: #fff; }
 .theme-toggle .toggle-icon { font-size: 0.75rem; transition: transform 0.3s; }
 
+.header-left {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
 .header-brand {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: 0.3px;
 }
 .header-system {
   font-family: 'DM Mono', monospace;
-  font-size: 0.58rem;
+  font-size: 0.52rem;
   font-weight: 400;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.60);
-  text-align: center;
-  flex: 1;
 }
 .header-right { display: flex; align-items: center; gap: 14px; }
 .version-badge { font-family: 'DM Mono', monospace; font-size: 0.56rem; font-weight: 500; letter-spacing: 1px; color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.30); border-radius: 5px; padding: 3px 9px; }
@@ -347,8 +350,10 @@ body { background: var(--bg); color: var(--text); font-family: 'Poppins', sans-s
 <body>
 
 <div class="header">
-  <div class="header-brand">Fiobras</div>
-  <div class="header-system">Formação de Preço</div>
+  <div class="header-left">
+    <span class="header-brand">Fiobras</span>
+    <span class="header-system">Formação de Preço</span>
+  </div>
   <div class="header-right">
     <div class="version-badge" id="app-version">v1.3</div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Alternar tema">
