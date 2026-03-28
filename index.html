@@ -47,8 +47,8 @@
 :root {
   --green:#008835;--green2:#006828;--blue:#0076BE;--blue2:#005a93;--yellow:#FFCB00;--red:#C0392B;
   /* Light theme (padrão) */
-  --bg:#EFF5F1;--surface:#FFFFFF;--surface2:#F5FAF7;
-  --border:#D4E4DA;--border2:#B5CFC0;
+  --bg:#EDF2EE;--surface:#FFFFFF;--surface2:#F5F8F5;
+  --border:#CDDBD2;--border2:#B0C9B8;
   --text:#1A2E1E;--cream:#1A2E1E;--muted:#567A5E;--muted2:#8AAF92;
   --input-bg:#FFFFFF;--input-border:#C5DDD0;--input-glow:rgba(0,136,53,0.12);
   --shadow-sm:0 1px 4px rgba(0,0,0,.06);--shadow-md:0 2px 10px rgba(0,0,0,.08);
@@ -112,7 +112,7 @@ html[data-theme="dark"],html[data-theme="dark"] :root {
 [data-theme="dark"] .version-badge{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;font-weight:300;min-height:100vh;transition:background .3s,color .3s;}
-@media(max-width:700px){body{zoom:0.85;}.splash,.login-screen,.modal-bg{zoom:1.176;}}/* 1/0.85 = 1.176 to counter body zoom on fixed elements */
+@media(max-width:700px){html{zoom:0.85;}}
 
 /* ── HEADER ── */
 .header{position:sticky;top:0;z-index:100;background:#008835;padding:0 28px 0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.25);overflow:hidden;}
@@ -280,8 +280,10 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 .footer-sub{font-family:‘Poppins’,sans-serif;font-size:.62rem;font-weight:300;color:var(–muted);}
 .footer-copy{font-family:‘DM Mono’,monospace;font-size:.55rem;letter-spacing:1.5px;text-transform:uppercase;color:var(–muted2);text-align:right;}
 /* ── LOGIN SCREEN ── */
-.login-screen{position:fixed;inset:0;z-index:9998;background:#008835;display:flex;align-items:flex-end;justify-content:center;}
-.login-card{background:#fff;width:100%;max-width:420px;border-radius:24px 24px 0 0;padding:36px 28px 40px;box-shadow:0 -8px 40px rgba(0,0,0,.2);}
+.login-screen{position:fixed;inset:0;z-index:9998;background:#008835;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .4s;}
+.login-screen.visible{opacity:1;}
+.login-screen.hide{opacity:0;visibility:hidden;pointer-events:none;display:none;}
+.login-card{background:#fff;width:100%;max-width:380px;border-radius:16px;padding:36px 28px 40px;box-shadow:0 12px 48px rgba(0,0,0,.3);}
 .login-title{font-family:‘Poppins’,sans-serif;font-size:1.1rem;font-weight:700;color:#1A2E1E;margin-bottom:4px;}
 .login-sub{font-family:‘DM Mono’,monospace;font-size:.6rem;color:#567A5E;letter-spacing:1px;margin-bottom:24px;}
 .login-users{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
@@ -297,7 +299,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 .login-admin button:hover{background:#006828;}
 .login-error{font-size:.65rem;color:#C0392B;margin-top:8px;min-height:18px;}
 .login-screen.hide{display:none;}
-@media(min-width:700px){.login-screen{align-items:center;}.login-card{border-radius:16px;max-width:380px;box-shadow:0 12px 48px rgba(0,0,0,.3);}}
+@media(max-width:500px){.login-card{max-width:calc(100% - 32px);}}
 
 /* ── SAVE COTAÇÃO MODAL ── */
 .save-cot-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(–surface);border:1.5px solid var(–blue);border-radius:8px;color:var(–blue);font-family:‘Poppins’,sans-serif;font-size:.62rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .15s;margin-top:16px;}
@@ -314,8 +316,8 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 .hist-table .ht-price{font-family:‘DM Mono’,monospace;font-weight:500;color:var(–green);}
 .hist-empty{text-align:center;padding:40px;color:var(–muted);font-size:.8rem;}
 .hist-filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
-.hist-filters input{padding:8px 12px;background:#fff;border:1.5px solid #C5DDD0;border-radius:7px;font-family:‘DM Mono’,monospace;font-size:.72rem;color:var(–text);outline:none;min-width:160px;}
-.hist-filters input:focus{border-color:#008835;}
+.hist-filters input{padding:8px 12px;background:var(–input-bg);border:1.5px solid var(–input-border);border-radius:7px;font-family:‘DM Mono’,monospace;font-size:.72rem;color:var(–text);outline:none;min-width:160px;}
+.hist-filters input:focus{border-color:var(–green);}
 
 /* ── SPLASH SCREEN ── */
 .splash{position:fixed;inset:0;z-index:9999;background:#008835;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .4s,visibility .4s;}
@@ -344,7 +346,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     <div class="splash-sub">Formação de Preço</div>
   </div>
   <div class="splash-bar-wrap"><div class="splash-bar"></div></div>
-  <div class="splash-version" id="splash-version">v2.5.1</div>
+  <div class="splash-version" id="splash-version">v3.0.4</div>
 </div>
 
 <!-- LOGIN SCREEN -->
@@ -360,8 +362,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     </div>
     <div class="login-divider">Admin</div>
     <div class="login-admin">
-      <input type="password" id="adminPass" placeholder="Senha" onkeydown="if(event.key==='Enter')loginAdmin()">
-      <button onclick="loginAdmin()">Entrar</button>
+      <input type="password" id="adminPass" placeholder="Senha do admin" oninput="checkAdminPass()">
     </div>
     <div class="login-error" id="loginError"></div>
   </div>
@@ -377,7 +378,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     </button>
   </div>
   <div class="header-right">
-    <div class="version-badge" id="app-version">v2.5.1</div>
+    <div class="version-badge" id="app-version">v3.0.4</div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Alternar tema">
       <span class="toggle-icon" id="toggle-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></span>
     </button>
@@ -731,8 +732,18 @@ function applyTheme(dark){
 }
 function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?false:true);}
 (function(){applyTheme(localStorage.getItem('fiobras-theme')==='dark');})();
-// Splash screen — dismiss after 2.5s, show login
-window.addEventListener('DOMContentLoaded',function(){setTimeout(function(){var s=document.getElementById('splash');if(s)s.classList.add('hide');setTimeout(function(){if(s)s.style.display='none';},500);},2500);});
+// Splash → Login flow
+window.addEventListener('DOMContentLoaded',function(){
+  setTimeout(function(){
+    var s=document.getElementById('splash');
+    if(s)s.classList.add('hide');
+    setTimeout(function(){
+      if(s)s.style.display='none';
+      var ls=document.getElementById('loginScreen');
+      if(ls)ls.classList.add('visible');
+    },500);
+  },2500);
+});
 </script>
 
 <!-- ── FIREBASE ── -->
@@ -797,7 +808,7 @@ window._editarCotacao=(key,dados)=>set(child(historicoRef,key),dados).catch(e=>c
 <!-- ── APP LOGIC ── -->
 
 <script>
-const APP_VERSION='v2.5.1';
+const APP_VERSION='v3.0.4';
 const ICMS_FUNDOS=0.0318,PIS_COFINS_AL=0.0925,IRPJ_RATE=0.34;
 const cenariosVenda=[{label:'ICMS 17%',pis:0.013695,cofins:0.06308,cred:0.01295},{label:'ICMS 12%',pis:0.01452,cofins:0.06688,cred:0.008325},{label:'ICMS 7%',pis:0.015345,cofins:0.07068,cred:0.0037},{label:'ICMS 4%',pis:0.01584,cofins:0.07296,cred:0.000925}];
 const cenariosServico=[{label:'Dentro do Estado',pis:0.0165,cofins:0.076,cred:0,icmsFundos:0},{label:'Fora do Estado',pis:0.01452,cofins:0.06688,cred:0.008325,icmsFundos:0.0318}];
@@ -807,7 +818,8 @@ let icmsV=0.00,tipoAtivo=null,vModo='tingimento';
 let currentUser=null;
 let isAdmin=false;
 function loginUser(name){currentUser=name;isAdmin=false;document.getElementById('loginScreen').classList.add('hide');showApp();}
-function loginAdmin(){const pass=document.getElementById('adminPass').value;if(pass==='admin'){currentUser='Admin';isAdmin=true;document.getElementById('loginScreen').classList.add('hide');showApp();}else{document.getElementById('loginError').textContent='Senha incorreta';setTimeout(()=>{document.getElementById('loginError').textContent='';},2500);}}
+function loginAdmin(){currentUser='Admin';isAdmin=true;document.getElementById('loginScreen').classList.add('hide');showApp();}
+function checkAdminPass(){const pass=document.getElementById('adminPass').value;if(pass==='admin'){loginAdmin();}}
 function showApp(){document.getElementById('appHeader').style.display='';document.getElementById('appTabs').style.display='';document.getElementById('appFooter').style.display='';document.querySelectorAll('.mob-overlay,.mob-dropdown').forEach(el=>el.style.removeProperty('display'));switchTab('vendas',document.querySelector('.tab-btn'));}
 function canAccessTab(tab){return true;}
 
@@ -836,9 +848,10 @@ function calcResultado(precoBase,custoTotal,totalImpPct,dopPct,jcpPct){const vLi
 
 // ── RENDER RESULTADO (com botão salvar cotação) ──
 let _lastPreco={};
-function renderResultado(elId,r,abaName){
+const TARGET_LABELS={'0':'0%','jcp':'JCP','jcp3':'JCP+3%','jcp5':'JCP+5%','jcp10':'JCP+10%','jcp25':'JCP+25%'};
+function renderResultado(elId,r,abaName,precoVenda,margemKey){
   const vLiq=r.vLiq;const pConsol=vLiq>0?r.consol/vLiq:0;const pLiq=vLiq>0?r.lLiq/vLiq:0;const liqCls=r.lLiq>=0?'pos':'neg';
-  if(abaName)_lastPreco[abaName]={vLiq:r.vLiq,consol:r.consol};
+  if(abaName)_lastPreco[abaName]={preco:precoVenda||0,margem:TARGET_LABELS[margemKey]||margemKey||'—'};
   const saveBtn='<button class="save-cot-btn" onclick="abrirSalvarCotacao(\''+( abaName||'' )+'\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Salvar cotação</button>';
   document.getElementById(elId).innerHTML='<div class="res-top"><div><div class="res-top-label">Margem consolidada</div><div class="res-big-pct">'+(pConsol*100).toFixed(1)+'<span class="pct-sign">%</span></div><div class="res-big-sub">sobre a venda líquida</div></div><div><div class="res-consol-val"><small>R$</small> '+r.consol.toFixed(2).replace('.',',')+'</div><div class="res-consol-sub">lucro líquido + JCP</div></div></div><div class="res-row"><span class="rr-label">Lucro líquido</span><div class="rr-right"><span class="rr-pct">'+fmtPct(pLiq)+'</span><span class="rr-val '+liqCls+'">'+fmtR(r.lLiq)+'</span></div></div><div style="padding:4px 20px 14px;text-align:right">'+saveBtn+'</div>';
 }
@@ -895,10 +908,10 @@ function confirmarSalvarCotacao(){
   if(!empresa){alert('Preencha a empresa.');return;}
   if(!titulo){alert('Preencha o título (ex: 20/1).');return;}
   if(!tipofio){alert('Selecione o tipo do fio.');return;}
-  const precoVal=parseFloat(document.getElementById('modal-cot-preco').value)||(_lastPreco[aba]||{}).vLiq||0;
+  const precoVal=parseFloat(document.getElementById('modal-cot-preco').value)||(_lastPreco[aba]||{}).preco||0;const margemVal=(_lastPreco[aba]||{}).margem||'—';
   const now=new Date();
   const produto=fibra+' '+cor+' '+titulo+' '+tipofio;
-  const dados={timestamp:now.getTime(),data:now.toLocaleDateString('pt-BR'),hora:now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),usuario:currentUser||'—',empresa:empresa,fibra:fibra,cor:cor,titulo:titulo,tipofio:tipofio,produto:produto,aba:aba,preco:precoVal,precoFmt:'R$ '+precoVal.toFixed(2).replace('.',',')};
+  const dados={timestamp:now.getTime(),data:now.toLocaleDateString('pt-BR'),hora:now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),usuario:currentUser||'—',empresa:empresa,fibra:fibra,cor:cor,titulo:titulo,tipofio:tipofio,produto:produto,aba:aba,preco:precoVal,precoFmt:'R$ '+precoVal.toFixed(2).replace('.',','),margem:margemVal};
   if(_editKey&&window._editarCotacao){window._editarCotacao(_editKey,dados);}
   else if(window._salvarCotacao){window._salvarCotacao(dados);}
   _editKey=null;
@@ -913,18 +926,16 @@ function confirmarSalvarCotacao(){
 // ── HISTÓRICO ──
 function renderHistorico(){
   const area=document.getElementById('histArea');if(!area)return;
-  // Show/hide admin add button
   const addBtn=document.getElementById('hist-add-btn');if(addBtn)addBtn.style.display=isAdmin?'':'none';
   const data=window._historicoData||[];
   const search=(document.getElementById('hist-search')?.value||'').toLowerCase();
   const filtered=search?data.filter(d=>(d.empresa||'').toLowerCase().includes(search)||(d.produto||'').toLowerCase().includes(search)||(d.fibra||'').toLowerCase().includes(search)):data;
   if(!filtered.length){area.innerHTML='<div class="hist-empty">Nenhuma cotação salva ainda.</div>';return;}
-  const adminCol=isAdmin?'<th style="width:70px"></th>':'';
-  area.innerHTML='<div style="overflow-x:auto"><table class="hist-table"><thead><tr><th>Data</th><th>Empresa</th><th>Produto</th><th>Aba</th><th>Preço</th><th>Usuário</th>'+adminCol+'</tr></thead><tbody>'+filtered.map(d=>{
-    const prod=d.produto||(d.fibra?d.fibra+' '+d.cor+' '+(d.titulo||'')+' '+(d.tipofio||''):'—');
-    const adminBtns=isAdmin&&d._key?'<td style="white-space:nowrap"><button onclick="editarRegistro(\''+d._key+'\')" style="background:none;border:none;cursor:pointer;color:var(--blue);font-size:.75rem;padding:4px" title="Editar">✎</button><button onclick="deletarRegistro(\''+d._key+'\')" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:.75rem;padding:4px;margin-left:4px" title="Excluir">✕</button></td>':'';
-    return'<tr><td class="ht-date">'+(d.data||'—')+'<br><span style="opacity:.6">'+(d.hora||'')+'</span></td><td style="font-weight:500">'+(d.empresa||'—')+'</td><td><span style="color:var(--green);font-weight:600">'+(d.fibra||'')+'</span> '+(d.cor||'')+'<br><span style="font-family:DM Mono,monospace;font-size:.68rem">'+(d.titulo||'')+' <span style="color:var(--muted);font-size:.62rem">'+(d.tipofio||'')+'</span></span></td><td style="font-size:.62rem;color:var(--muted);text-transform:capitalize">'+(d.aba||'—')+'</td><td class="ht-price">'+(d.precoFmt||'—')+'</td><td class="ht-user">'+(d.usuario||'—')+'</td>'+adminBtns+'</tr>';
-  }).join('')+'</tbody></table></div>';
+  // Card-based layout (works on mobile and desktop)
+  area.innerHTML=filtered.map(d=>{
+    const adminBtns=isAdmin&&d._key?'<div style="display:flex;gap:6px;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)"><button onclick="editarRegistro(\''+d._key+'\')" style="flex:1;padding:6px;background:none;border:1px solid var(--blue);border-radius:6px;color:var(--blue);font-size:.62rem;font-family:Poppins,sans-serif;font-weight:600;cursor:pointer;text-transform:uppercase;letter-spacing:1px">Editar</button><button onclick="deletarRegistro(\''+d._key+'\')" style="padding:6px 12px;background:none;border:1px solid var(--red);border-radius:6px;color:var(--red);font-size:.62rem;font-family:Poppins,sans-serif;font-weight:600;cursor:pointer;text-transform:uppercase;letter-spacing:1px">Excluir</button></div>':'';
+    return'<div style="background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px"><div><span style="font-weight:600;color:var(--text);font-size:.85rem">'+(d.empresa||'—')+'</span></div><div style="text-align:right"><span style="font-family:DM Mono,monospace;font-size:1rem;font-weight:600;color:var(--green)">'+(d.precoFmt||'—')+'</span><br><span style="font-family:DM Mono,monospace;font-size:.6rem;color:var(--blue)">'+(d.margem||'—')+'</span></div></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px"><span style="font-family:DM Mono,monospace;font-size:.72rem;color:var(--green);font-weight:600">'+(d.fibra||'')+'</span><span style="font-size:.72rem;color:var(--text)">'+(d.cor||'')+'</span><span style="font-family:DM Mono,monospace;font-size:.72rem;color:var(--muted)">'+(d.titulo||'')+'</span><span style="font-size:.65rem;color:var(--muted2);background:var(--surface2);padding:1px 8px;border-radius:10px">'+(d.tipofio||'')+'</span></div><div style="display:flex;justify-content:space-between;align-items:center;font-size:.62rem;color:var(--muted)"><span style="font-family:DM Mono,monospace">'+(d.data||'')+' '+(d.hora||'')+'</span><span style="text-transform:capitalize">'+(d.aba||'')+'</span><span>'+(d.usuario||'')+'</span></div>'+adminBtns+'</div>';
+  }).join('');
 }
 
 function deletarRegistro(key){
@@ -977,7 +988,7 @@ function abrirAdicionarManual(){
   setTimeout(()=>document.getElementById('modal-cot-empresa').focus(),50);
 }
 
-function calcVendas(){const cf=g('v-custoFio');const cp=g('v-prep');const ct=vModo==='tingimento'?g('v-ting'):0;const oc=g('v-outros');const dop=g('v-despOp')/100;const jcp=g('v-jcp')/100;const recup=(cf-cf*icmsV)*PIS_COFINS_AL;const custoFioLiq=cf-recup;const descPct=cf>0?(recup/cf*100).toFixed(2):'0.00';document.getElementById('v-custoReal').textContent='R$ '+custoFioLiq.toFixed(2).replace('.',',');document.getElementById('v-custoTag').textContent='↓ '+descPct+'% desconto efetivo';const custoTotal=custoFioLiq+cp+ct+oc;const c0=cenariosVenda[0];const imp0=ICMS_FUNDOS+c0.pis+c0.cofins+c0.cred;const targetMap={'0':0,'jcp':jcp,'jcp3':jcp+0.03,'jcp5':jcp+0.05,'jcp10':jcp+0.10,'jcp25':jcp+0.25};const lo=resolverLucroParaMeta(custoTotal,imp0,dop,jcp,targetMap[targetMode]??(jcp+0.05));document.getElementById('v-lucro').value=(lo*100).toFixed(2);const div0=1-imp0-lo;const precoBase=div0>0?custoTotal/div0:0;document.getElementById('v-gridVenda').innerHTML='<div class="price-card"><div class="badge">Preço único · todas as alíquotas</div><div class="main-value"><small>R$</small> '+precoBase.toFixed(2).replace('.',',')+'</div><div class="sub">independente da alíquota de saída</div></div>';_lastPreco['vendas']={vLiq:precoBase};renderResultado('v-resultado',calcResultado(precoBase,custoTotal,imp0,dop,jcp),'vendas');}
+function calcVendas(){const cf=g('v-custoFio');const cp=g('v-prep');const ct=vModo==='tingimento'?g('v-ting'):0;const oc=g('v-outros');const dop=g('v-despOp')/100;const jcp=g('v-jcp')/100;const recup=(cf-cf*icmsV)*PIS_COFINS_AL;const custoFioLiq=cf-recup;const descPct=cf>0?(recup/cf*100).toFixed(2):'0.00';document.getElementById('v-custoReal').textContent='R$ '+custoFioLiq.toFixed(2).replace('.',',');document.getElementById('v-custoTag').textContent='↓ '+descPct+'% desconto efetivo';const custoTotal=custoFioLiq+cp+ct+oc;const c0=cenariosVenda[0];const imp0=ICMS_FUNDOS+c0.pis+c0.cofins+c0.cred;const targetMap={'0':0,'jcp':jcp,'jcp3':jcp+0.03,'jcp5':jcp+0.05,'jcp10':jcp+0.10,'jcp25':jcp+0.25};const lo=resolverLucroParaMeta(custoTotal,imp0,dop,jcp,targetMap[targetMode]??(jcp+0.05));document.getElementById('v-lucro').value=(lo*100).toFixed(2);const div0=1-imp0-lo;const precoBase=div0>0?custoTotal/div0:0;document.getElementById('v-gridVenda').innerHTML='<div class="price-card"><div class="badge">Preço único · todas as alíquotas</div><div class="main-value"><small>R$</small> '+precoBase.toFixed(2).replace('.',',')+'</div><div class="sub">independente da alíquota de saída</div></div>';renderResultado('v-resultado',calcResultado(precoBase,custoTotal,imp0,dop,jcp),'vendas',precoBase,targetMode);}
 
 let tingTargetMode='jcp5';
 function setTingTarget(mode,btn){tingTargetMode=mode;document.querySelectorAll('#panel-tingimento .target-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');calcTingimento();}
@@ -985,13 +996,13 @@ function populaTingTipos(){const sel=document.getElementById('t-tipo');if(!sel)r
 function populaTingCores(){const tipo=document.getElementById('t-tipo').value;const sel=document.getElementById('t-cor');if(!sel)return;const cores=cadastro[tipo]||[];sel.innerHTML=cores.length?cores.map((c,i)=>'<option value="'+i+'">'+c.cor+'</option>').join(''):'<option value="">—</option>';onTCorChange();}
 function onTTipoChange(){populaTingCores();}
 function onTCorChange(){const tipo=document.getElementById('t-tipo').value;const idx=parseInt(document.getElementById('t-cor').value);const cores=cadastro[tipo]||[];if(cores[idx]!==undefined)document.getElementById('t-ting').value=cores[idx].custo.toFixed(2);calcTingimento();}
-function calcTingimento(){const ct=g('t-ting');const oc=g('t-outros');const dop=g('t-despOp')/100;const jcp=g('t-jcp')/100;const custoTotal=ct+oc;const c0=cenariosServico[0];const imp0=c0.icmsFundos+c0.pis+c0.cofins+c0.cred;const targetMap={'0':0,'jcp':jcp,'jcp3':jcp+0.03,'jcp5':jcp+0.05,'jcp10':jcp+0.10,'jcp25':jcp+0.25};const lo=resolverLucroParaMeta(custoTotal,imp0,dop,jcp,targetMap[tingTargetMode]??(jcp+0.05));document.getElementById('t-lucro').value=(lo*100).toFixed(2);const precos=cenariosServico.map(c=>{const imp=c.icmsFundos+c.pis+c.cofins+c.cred;const div=1-imp-lo;return div>0?custoTotal/div:0;});document.getElementById('t-gridVenda').innerHTML=cenariosServico.map((c,i)=>'<div class="price-card"><div class="badge">'+c.label+'</div><div class="main-value"><small>R$</small> '+precos[i].toFixed(2).replace('.',',')+'</div><div class="sub">preço do serviço</div></div>').join('');_lastPreco['tingimento']={vLiq:precos[0]};renderResultado('t-resultado',calcResultado(precos[0],custoTotal,imp0,dop,jcp),'tingimento');}
+function calcTingimento(){const ct=g('t-ting');const oc=g('t-outros');const dop=g('t-despOp')/100;const jcp=g('t-jcp')/100;const custoTotal=ct+oc;const c0=cenariosServico[0];const imp0=c0.icmsFundos+c0.pis+c0.cofins+c0.cred;const targetMap={'0':0,'jcp':jcp,'jcp3':jcp+0.03,'jcp5':jcp+0.05,'jcp10':jcp+0.10,'jcp25':jcp+0.25};const lo=resolverLucroParaMeta(custoTotal,imp0,dop,jcp,targetMap[tingTargetMode]??(jcp+0.05));document.getElementById('t-lucro').value=(lo*100).toFixed(2);const precos=cenariosServico.map(c=>{const imp=c.icmsFundos+c.pis+c.cofins+c.cred;const div=1-imp-lo;return div>0?custoTotal/div:0;});document.getElementById('t-gridVenda').innerHTML=cenariosServico.map((c,i)=>'<div class="price-card"><div class="badge">'+c.label+'</div><div class="main-value"><small>R$</small> '+precos[i].toFixed(2).replace('.',',')+'</div><div class="sub">preço do serviço</div></div>').join('');renderResultado('t-resultado',calcResultado(precos[0],custoTotal,imp0,dop,jcp),'tingimento',precos[0],tingTargetMode);}
 
 let prepTargetMode='jcp5';
 function setPrepTarget(mode,btn){prepTargetMode=mode;document.querySelectorAll('#panel-preparacao .target-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');calcPreparacao();}
 function toggleCustoHoraPrep(){const row=document.getElementById('pp-custoHoraRow');const inp=document.getElementById('pp-custoHora');const btn=document.getElementById('pp-lockBtn');const save=document.getElementById('pp-saveHora');const locked=row.classList.contains('locked');if(locked){row.classList.remove('locked');inp.removeAttribute('readonly');inp.focus();inp.select();btn.textContent='🔓';btn.style.color='var(--yellow)';save.style.display='block';}else{row.classList.add('locked');inp.setAttribute('readonly',true);btn.textContent='🔒';btn.style.color='var(--muted)';save.style.display='none';}}
 function salvarCustoHoraPrep(val){const btn=document.getElementById('pp-saveHora');const lock=document.getElementById('pp-lockBtn');const row=document.getElementById('pp-custoHoraRow');const inp=document.getElementById('pp-custoHora');if(!window._salvarCustoHoraPrep)return;if(btn){btn.textContent='...';btn.disabled=true;}window._salvarCustoHoraPrep(val).then(()=>{if(btn)btn.textContent='✓ Salvo';setTimeout(()=>{row.classList.add('locked');inp.setAttribute('readonly',true);lock.textContent='🔒';lock.style.color='var(--muted)';if(btn){btn.style.display='none';btn.textContent='Salvar';btn.disabled=false;}},1200);}).catch(()=>{if(btn){btn.textContent='Erro';btn.disabled=false;}});}
-function calcPreparacao(){const custoHora=parseFloat(document.getElementById('pp-custoHora').value)||0;const producao=parseFloat(document.getElementById('pp-producao').value)||0;const fatorMensal=parseFloat(document.getElementById('pp-fatorMensal').value)||566;const oc=g('pp-outros');const dop=g('pp-despOp')/100;const jcp=g('pp-jcp')/100;const opEl=document.getElementById('pp-custoOp');if(!producao||!custoHora){if(opEl)opEl.value='0';document.getElementById('pp-gridVenda').innerHTML='';document.getElementById('pp-resultado').innerHTML='<div class="empty-state">Preencha o custo hora e a produção mensal.</div>';document.getElementById('pp-lucro').value='0';return;}const prodHora=producao/fatorMensal;const custoKg=custoHora/prodHora;if(opEl)opEl.value=custoKg.toFixed(4);const custoTotal=custoKg+oc;const c0=cenariosServico[0];const imp0=c0.icmsFundos+c0.pis+c0.cofins+c0.cred;const targetMap={'0':0,'jcp':jcp,'jcp3':jcp+0.03,'jcp5':jcp+0.05,'jcp10':jcp+0.10,'jcp25':jcp+0.25};const lo=resolverLucroParaMeta(custoTotal,imp0,dop,jcp,targetMap[prepTargetMode]??(jcp+0.05));document.getElementById('pp-lucro').value=(lo*100).toFixed(2);const precos=cenariosServico.map(c=>{const imp=c.icmsFundos+c.pis+c.cofins+c.cred;const div=1-imp-lo;return div>0?custoTotal/div:0;});document.getElementById('pp-gridVenda').innerHTML=cenariosServico.map((c,i)=>'<div class="price-card"><div class="badge">'+c.label+'</div><div class="main-value"><small>R$</small> '+precos[i].toFixed(2).replace('.',',')+'</div><div class="sub">preço do serviço</div></div>').join('');_lastPreco['preparacao']={vLiq:precos[0]};renderResultado('pp-resultado',calcResultado(precos[0],custoTotal,imp0,dop,jcp),'preparacao');}
+function calcPreparacao(){const custoHora=parseFloat(document.getElementById('pp-custoHora').value)||0;const producao=parseFloat(document.getElementById('pp-producao').value)||0;const fatorMensal=parseFloat(document.getElementById('pp-fatorMensal').value)||566;const oc=g('pp-outros');const dop=g('pp-despOp')/100;const jcp=g('pp-jcp')/100;const opEl=document.getElementById('pp-custoOp');if(!producao||!custoHora){if(opEl)opEl.value='0';document.getElementById('pp-gridVenda').innerHTML='';document.getElementById('pp-resultado').innerHTML='<div class="empty-state">Preencha o custo hora e a produção mensal.</div>';document.getElementById('pp-lucro').value='0';return;}const prodHora=producao/fatorMensal;const custoKg=custoHora/prodHora;if(opEl)opEl.value=custoKg.toFixed(4);const custoTotal=custoKg+oc;const c0=cenariosServico[0];const imp0=c0.icmsFundos+c0.pis+c0.cofins+c0.cred;const targetMap={'0':0,'jcp':jcp,'jcp3':jcp+0.03,'jcp5':jcp+0.05,'jcp10':jcp+0.10,'jcp25':jcp+0.25};const lo=resolverLucroParaMeta(custoTotal,imp0,dop,jcp,targetMap[prepTargetMode]??(jcp+0.05));document.getElementById('pp-lucro').value=(lo*100).toFixed(2);const precos=cenariosServico.map(c=>{const imp=c.icmsFundos+c.pis+c.cofins+c.cred;const div=1-imp-lo;return div>0?custoTotal/div:0;});document.getElementById('pp-gridVenda').innerHTML=cenariosServico.map((c,i)=>'<div class="price-card"><div class="badge">'+c.label+'</div><div class="main-value"><small>R$</small> '+precos[i].toFixed(2).replace('.',',')+'</div><div class="sub">preço do serviço</div></div>').join('');renderResultado('pp-resultado',calcResultado(precos[0],custoTotal,imp0,dop,jcp),'preparacao',precos[0],prepTargetMode);}
 
 function renderCustosTab(){const tipos=Object.keys(cadastro);if(!tipoAtivo||!cadastro[tipoAtivo])tipoAtivo=tipos[0]||null;const ordemTipos=['CO',...Object.keys(MULTIPLICADORES).filter(t=>cadastro[t])];const tiposDisponiveis=ordemTipos.filter(t=>cadastro[t]);document.getElementById('tipoTabs').innerHTML=tiposDisponiveis.length?tiposDisponiveis.map(t=>{const isDeriv=t!=='CO';const badge=isDeriv?'<span style="font-size:0.5rem;opacity:0.5;margin-left:3px">auto</span>':'';const del=!isDeriv?'<span class="del-tipo" onclick="event.stopPropagation();deletarTipo(\''+t+'\')">✕</span>':'';return'<div class="tipo-tab '+(t===tipoAtivo?'active':'')+'" onclick="selecionarTipo(\''+t+'\')">'+t+badge+del+'</div>';}).join(''):'<span style="font-size:0.75rem;color:var(--muted)">Nenhum tipo cadastrado</span>';const area=document.getElementById('coresArea');if(!tipoAtivo){area.innerHTML='<div class="empty-state">Adicione um tipo de fio para começar.</div>';return;}const isDeriv=tipoAtivo!=='CO';const cores=cadastro[tipoAtivo]||[];const coBase=cadastro['CO']||[];const mults=MULTIPLICADORES[tipoAtivo]?[...MULTIPLICADORES[tipoAtivo]]:[];if(isDeriv){area.innerHTML='<div style="margin-bottom:12px;padding:10px 16px;background:rgba(0,136,53,0.06);border:1.5px solid var(--border);border-radius:8px;font-size:0.72rem;color:var(--muted);display:flex;align-items:center;justify-content:space-between;gap:12px"><span>Valores calculados a partir do <strong style="color:var(--accent)">CO</strong>. '+(multEditando?'<strong style="color:var(--yellow)">Editando…</strong>':'Clique no cadeado para ajustar.')+'</span><button onclick="toggleMultEdit()" style="background:none;border:none;cursor:pointer;font-size:1.1rem;padding:2px 6px;color:'+(multEditando?'var(--yellow)':'var(--muted)')+'">'+(multEditando?'🔓':'🔒')+'</button></div><table class="cores-table"><thead><tr><th>Cor</th><th>Base CO</th><th>Mult</th><th>Calculado</th></tr></thead><tbody>'+cores.map((c,i)=>{const mult=mults[Math.min(i,mults.length-1)];const custoCO=coBase[i]?coBase[i].custo:0;const pct=(mult*100).toFixed(0);const multCell=multEditando?'<input id="mult-inp-'+i+'" type="number" value="'+pct+'" min="1" max="999" step="1" style="width:60px;padding:4px 6px;background:rgba(255,203,0,0.08);border:1.5px solid var(--yellow);border-radius:5px;color:var(--yellow);font-family:DM Mono,monospace;font-size:.78rem;outline:none;text-align:center" oninput="previewMult('+i+',this.value)">%':'<span style="font-family:DM Mono,monospace;font-size:.72rem;color:var(--yellow);background:rgba(255,203,0,0.08);padding:2px 7px;border-radius:4px">'+pct+'%</span>';return'<tr><td>'+c.cor+'</td><td style="color:var(--muted)">R$ '+custoCO.toFixed(2).replace('.',',')+'</td><td>'+multCell+'</td><td id="mult-val-'+i+'" style="font-family:DM Mono,monospace;color:var(--accent);font-weight:500">R$ '+c.custo.toFixed(2).replace('.',',')+'</td></tr>';}).join('')+'</tbody></table>';}else{area.innerHTML='<table class="cores-table"><thead><tr><th>Cor</th><th>Custo Tingimento (R$)</th><th class="td-del"></th></tr></thead><tbody>'+cores.map((c,i)=>'<tr><td><input type="text" value="'+c.cor+'" onchange="editarCor(\'CO\','+i+',\'cor\',this.value)"></td><td><input type="number" value="'+c.custo.toFixed(2)+'" step="0.01" min="0" onchange="editarCor(\'CO\','+i+',\'custo\',this.value)"></td><td class="td-del"><button class="del-btn" onclick="deletarCor(\'CO\','+i+')">✕</button></td></tr>').join('')+'</tbody></table><div style="margin-top:14px"><button class="add-btn" onclick="abrirModalCor()">+ Nova cor</button></div>';}}
 function previewMult(idx,val){const pct=parseFloat(val)||0;const mult=pct/100;const coBase=cadastro['CO']||[];const custoCO=coBase[idx]?coBase[idx].custo:0;const calc=custoCO*mult;const el=document.getElementById('mult-val-'+idx);if(el)el.textContent='R$ '+calc.toFixed(2).replace('.',',');}
@@ -1028,7 +1039,7 @@ function closeMobNav(){document.getElementById('mob-dropdown').classList.remove(
 
 let retTargetMode='jcp5';
 function setRetTarget(mode,btn){retTargetMode=mode;document.querySelectorAll('#panel-retorcao .target-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');calcRetorcao();}
-function calcRetorcao(){const custoHora=parseFloat(document.getElementById('r-custoHora').value)||0;const producao=parseFloat(document.getElementById('r-producao').value)||0;const fatorMensal=parseFloat(document.getElementById('r-fatorMensal').value)||566;const oc=g('r-outros');const dop=g('r-despOp')/100;const jcp=g('r-jcp')/100;const area=document.getElementById('r-custoArea');if(!producao||!custoHora){area.innerHTML='<div class="empty-state">Preencha o custo hora e a produção mensal.</div>';document.getElementById('r-gridVenda').innerHTML='';document.getElementById('r-resultado').innerHTML='';const opEl=document.getElementById('r-custoOp');if(opEl)opEl.value='0';return;}const prodHora=producao/fatorMensal;const custoKg=custoHora/prodHora;const opEl=document.getElementById('r-custoOp');if(opEl)opEl.value=custoKg.toFixed(4);area.innerHTML='<div class="price-card" style="max-width:260px"><div class="badge">Custo operacional por kg</div><div class="main-value"><small>R$</small> '+custoKg.toFixed(4).replace('.',',')+'</div><div class="sub">'+prodHora.toFixed(2).replace('.',',')+' kg/h · '+producao.toLocaleString('pt-BR')+' kg/mês</div></div>';const custoTotal=custoKg+oc;const c0=cenariosServico[0];const imp0=c0.icmsFundos+c0.pis+c0.cofins+c0.cred;const targetMap={'0':0,'jcp':jcp,'jcp3':jcp+0.03,'jcp5':jcp+0.05,'jcp10':jcp+0.10,'jcp25':jcp+0.25};const lo=resolverLucroParaMeta(custoTotal,imp0,dop,jcp,targetMap[retTargetMode]??(jcp+0.05));document.getElementById('r-lucro').value=(lo*100).toFixed(2);const precos=cenariosServico.map(c=>{const imp=c.icmsFundos+c.pis+c.cofins+c.cred;const div=1-imp-lo;return div>0?custoTotal/div:0;});document.getElementById('r-gridVenda').innerHTML=cenariosServico.map((c,i)=>'<div class="price-card"><div class="badge">'+c.label+'</div><div class="main-value"><small>R$</small> '+precos[i].toFixed(2).replace('.',',')+'</div><div class="sub">preço do serviço</div></div>').join('');_lastPreco['retorcao']={vLiq:precos[0]};renderResultado('r-resultado',calcResultado(precos[0],custoTotal,imp0,dop,jcp),'retorcao');}
+function calcRetorcao(){const custoHora=parseFloat(document.getElementById('r-custoHora').value)||0;const producao=parseFloat(document.getElementById('r-producao').value)||0;const fatorMensal=parseFloat(document.getElementById('r-fatorMensal').value)||566;const oc=g('r-outros');const dop=g('r-despOp')/100;const jcp=g('r-jcp')/100;const area=document.getElementById('r-custoArea');if(!producao||!custoHora){area.innerHTML='<div class="empty-state">Preencha o custo hora e a produção mensal.</div>';document.getElementById('r-gridVenda').innerHTML='';document.getElementById('r-resultado').innerHTML='';const opEl=document.getElementById('r-custoOp');if(opEl)opEl.value='0';return;}const prodHora=producao/fatorMensal;const custoKg=custoHora/prodHora;const opEl=document.getElementById('r-custoOp');if(opEl)opEl.value=custoKg.toFixed(4);area.innerHTML='<div class="price-card" style="max-width:260px"><div class="badge">Custo operacional por kg</div><div class="main-value"><small>R$</small> '+custoKg.toFixed(4).replace('.',',')+'</div><div class="sub">'+prodHora.toFixed(2).replace('.',',')+' kg/h · '+producao.toLocaleString('pt-BR')+' kg/mês</div></div>';const custoTotal=custoKg+oc;const c0=cenariosServico[0];const imp0=c0.icmsFundos+c0.pis+c0.cofins+c0.cred;const targetMap={'0':0,'jcp':jcp,'jcp3':jcp+0.03,'jcp5':jcp+0.05,'jcp10':jcp+0.10,'jcp25':jcp+0.25};const lo=resolverLucroParaMeta(custoTotal,imp0,dop,jcp,targetMap[retTargetMode]??(jcp+0.05));document.getElementById('r-lucro').value=(lo*100).toFixed(2);const precos=cenariosServico.map(c=>{const imp=c.icmsFundos+c.pis+c.cofins+c.cred;const div=1-imp-lo;return div>0?custoTotal/div:0;});document.getElementById('r-gridVenda').innerHTML=cenariosServico.map((c,i)=>'<div class="price-card"><div class="badge">'+c.label+'</div><div class="main-value"><small>R$</small> '+precos[i].toFixed(2).replace('.',',')+'</div><div class="sub">preço do serviço</div></div>').join('');renderResultado('r-resultado',calcResultado(precos[0],custoTotal,imp0,dop,jcp),'retorcao',precos[0],retTargetMode);}
 function toggleCustoHora(){const row=document.getElementById('r-custoHoraRow');const inp=document.getElementById('r-custoHora');const btn=document.getElementById('r-lockBtn');const save=document.getElementById('r-saveHora');const locked=row.classList.contains('locked');if(locked){row.classList.remove('locked');inp.removeAttribute('readonly');inp.focus();inp.select();btn.textContent='🔓';btn.style.color='var(--yellow)';save.style.display='block';}else{row.classList.add('locked');inp.setAttribute('readonly',true);btn.textContent='🔒';btn.style.color='var(--muted)';save.style.display='none';}}
 function salvarCustoHora(val){const btn=document.getElementById('r-saveHora');const lock=document.getElementById('r-lockBtn');const row=document.getElementById('r-custoHoraRow');const inp=document.getElementById('r-custoHora');if(!window._salvarCustoHora)return;if(btn){btn.textContent='...';btn.disabled=true;}window._salvarCustoHora(val).then(()=>{if(btn)btn.textContent='✓ Salvo';setTimeout(()=>{row.classList.add('locked');inp.setAttribute('readonly',true);lock.textContent='🔒';lock.style.color='var(--muted)';if(btn){btn.style.display='none';btn.textContent='Salvar';btn.disabled=false;}},1200);}).catch(()=>{if(btn){btn.textContent='Erro';btn.disabled=false;}});}
 
