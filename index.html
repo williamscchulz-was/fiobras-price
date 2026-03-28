@@ -3,7 +3,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=480">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fiobras · Precificação</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <!--
@@ -241,8 +241,8 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 .footer-sub{font-family:‘Poppins’,sans-serif;font-size:.62rem;font-weight:300;color:var(–muted);}
 .footer-copy{font-family:‘DM Mono’,monospace;font-size:.55rem;letter-spacing:1.5px;text-transform:uppercase;color:var(–muted2);text-align:right;}
 /* ── LOGIN SCREEN ── */
-.login-screen{position:fixed;inset:0;z-index:9998;background:var(–green);display:flex;align-items:flex-end;justify-content:center;}
-.login-card{background:var(–surface);width:100%;max-width:420px;border-radius:24px 24px 0 0;padding:36px 28px 40px;box-shadow:0 -8px 40px rgba(0,0,0,.2);}
+.login-screen{position:fixed;inset:0;z-index:9998;background:#008835;display:flex;align-items:flex-end;justify-content:center;}
+.login-card{background:#fff;width:100%;max-width:420px;border-radius:24px 24px 0 0;padding:36px 28px 40px;box-shadow:0 -8px 40px rgba(0,0,0,.2);}
 .login-title{font-family:‘Poppins’,sans-serif;font-size:1.1rem;font-weight:700;color:var(–text);margin-bottom:4px;}
 .login-sub{font-family:‘DM Mono’,monospace;font-size:.6rem;color:var(–muted);letter-spacing:1px;margin-bottom:24px;}
 .login-users{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
@@ -306,7 +306,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     <div class="splash-sub">Formação de Preço</div>
   </div>
   <div class="splash-bar-wrap"><div class="splash-bar"></div></div>
-  <div class="splash-version" id="splash-version">v2.0.2</div>
+  <div class="splash-version" id="splash-version">v2.0.3</div>
 </div>
 
 <!-- LOGIN SCREEN -->
@@ -339,7 +339,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     </button>
   </div>
   <div class="header-right">
-    <div class="version-badge" id="app-version">v2.0.2</div>
+    <div class="version-badge" id="app-version">v2.0.3</div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Alternar tema">
       <span class="toggle-icon" id="toggle-icon">🌙</span>
       <span id="toggle-label">Escuro</span>
@@ -451,7 +451,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 
 <!-- ===== VENDAS ===== -->
 
-<div class="panel active" id="panel-vendas">
+<div class="panel" id="panel-vendas">
 <div class="container">
 
   <div class="step">
@@ -754,7 +754,7 @@ window._salvarCotacao=(dados)=>push(historicoRef,dados).catch(e=>console.error('
 <!-- ── APP LOGIC ── -->
 
 <script>
-const APP_VERSION='v2.0.2';
+const APP_VERSION='v2.0.3';
 const ICMS_FUNDOS=0.0318,PIS_COFINS_AL=0.0925,IRPJ_RATE=0.34;
 const cenariosVenda=[{label:'ICMS 17%',pis:0.013695,cofins:0.06308,cred:0.01295},{label:'ICMS 12%',pis:0.01452,cofins:0.06688,cred:0.008325},{label:'ICMS 7%',pis:0.015345,cofins:0.07068,cred:0.0037},{label:'ICMS 4%',pis:0.01584,cofins:0.07296,cred:0.000925}];
 const cenariosServico=[{label:'Dentro do Estado',pis:0.0165,cofins:0.076,cred:0,icmsFundos:0},{label:'Fora do Estado',pis:0.01452,cofins:0.06688,cred:0.008325,icmsFundos:0.0318}];
