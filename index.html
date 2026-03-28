@@ -63,6 +63,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;font-weight:300;min-height:100vh;transition:background .3s,color .3s;}
+@media(max-width:700px){body{zoom:0.85;}.splash,.login-screen,.modal-bg{zoom:1.176;}}/* 1/0.85 = 1.176 to counter body zoom on fixed elements */
 
 /* ── HEADER ── */
 .header{position:sticky;top:0;z-index:100;background:#008835;padding:0 28px 0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.25);overflow:hidden;}
@@ -74,7 +75,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 .version-badge{font-family:‘DM Mono’,monospace;font-size:.56rem;font-weight:500;letter-spacing:1px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.30);border-radius:5px;padding:3px 9px;}
 .theme-toggle{display:flex;align-items:center;gap:6px;padding:5px 11px;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.28);border-radius:20px;cursor:pointer;font-family:‘DM Mono’,monospace;font-size:.58rem;font-weight:500;color:rgba(255,255,255,.85);transition:all .2s;user-select:none;}
 .theme-toggle:hover{background:rgba(255,255,255,.22);color:#fff;}
-.toggle-icon{font-size:.75rem;transition:transform .3s;}
+.toggle-icon{display:flex;align-items:center;transition:transform .3s;}
 
 /* ── TABS (desktop) ── */
 .tabs{background:var(–surface);border-bottom:1px solid var(–border);padding:0 32px;display:flex;position:sticky;top:52px;z-index:99;box-shadow:var(–shadow-sm);}
@@ -306,7 +307,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     <div class="splash-sub">Formação de Preço</div>
   </div>
   <div class="splash-bar-wrap"><div class="splash-bar"></div></div>
-  <div class="splash-version" id="splash-version">v2.1.0</div>
+  <div class="splash-version" id="splash-version">v2.1.1</div>
 </div>
 
 <!-- LOGIN SCREEN -->
@@ -339,10 +340,10 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     </button>
   </div>
   <div class="header-right">
-    <div class="version-badge" id="app-version">v2.1.0</div>
+    <div class="version-badge" id="app-version">v2.1.1</div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Alternar tema">
-      <span class="toggle-icon" id="toggle-icon">🌙</span>
-      <span id="toggle-label">Escuro</span>
+      <span class="toggle-icon" id="toggle-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></span>
+      <span id="toggle-label">Dark</span>
     </button>
   </div>
 </div>
@@ -684,8 +685,8 @@ function applyTheme(dark){
   document.documentElement.setAttribute('data-theme',dark?'dark':'light');
   const icon=document.getElementById('toggle-icon');
   const lbl=document.getElementById('toggle-label');
-  if(icon) icon.textContent=dark?'☀️':'🌙';
-  if(lbl) lbl.textContent=dark?'Claro':'Escuro';
+  if(icon) icon.innerHTML=dark?'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>':'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>';
+  if(lbl) lbl.textContent=dark?'Light':'Dark';
   localStorage.setItem('fiobras-theme',dark?'dark':'light');
 }
 function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?false:true);}
@@ -754,7 +755,7 @@ window._salvarCotacao=(dados)=>push(historicoRef,dados).catch(e=>console.error('
 <!-- ── APP LOGIC ── -->
 
 <script>
-const APP_VERSION='v2.1.0';
+const APP_VERSION='v2.1.1';
 const ICMS_FUNDOS=0.0318,PIS_COFINS_AL=0.0925,IRPJ_RATE=0.34;
 const cenariosVenda=[{label:'ICMS 17%',pis:0.013695,cofins:0.06308,cred:0.01295},{label:'ICMS 12%',pis:0.01452,cofins:0.06688,cred:0.008325},{label:'ICMS 7%',pis:0.015345,cofins:0.07068,cred:0.0037},{label:'ICMS 4%',pis:0.01584,cofins:0.07296,cred:0.000925}];
 const cenariosServico=[{label:'Dentro do Estado',pis:0.0165,cofins:0.076,cred:0,icmsFundos:0},{label:'Fora do Estado',pis:0.01452,cofins:0.06688,cred:0.008325,icmsFundos:0.0318}];
