@@ -54,13 +54,62 @@
   --shadow-sm:0 1px 4px rgba(0,0,0,.06);--shadow-md:0 2px 10px rgba(0,0,0,.08);
   --accent:#008835;--accent2:#006828;
 }
-[data-theme="dark"] {
-  --bg:#080e0a;--surface:#0f1a11;--surface2:#152018;
-  --border:#1b3020;--border2:#26442e;
-  --text:#eef3ef;--cream:#eef3ef;--muted:#5e8a66;--muted2:#3e5e45;--red:#e05252;
-  --input-bg:#091209;--input-border:#1a3520;--input-glow:rgba(0,136,53,0.2);
+html[data-theme="dark"],html[data-theme="dark"] :root {
+  --bg:#0A0A0A;--surface:#1C1C1E;--surface2:#252527;
+  --border:#2C2C2E;--border2:#3A3A3C;
+  --text:#F5F5F5;--cream:#F5F5F5;--muted:#8E8E93;--muted2:#636366;--red:#FF453A;
+  --input-bg:#1C1C1E;--input-border:#3A3A3C;--input-glow:rgba(0,136,53,0.25);
   --shadow-sm:none;--shadow-md:none;
+  color-scheme:dark;
 }
+/* ── DARK OVERRIDES (Nubank style) ── */
+[data-theme="dark"] .header{background:#1C1C1E;box-shadow:0 1px 0 #2C2C2E;}
+[data-theme="dark"] .tabs{background:#1C1C1E;border-color:#2C2C2E;box-shadow:none;}
+[data-theme="dark"] .field-row{background:#1C1C1E;border-color:#3A3A3C;}
+[data-theme="dark"] .field-row.locked{background:#252527;border-color:#2C2C2E;opacity:.5;}
+[data-theme="dark"] .field-prefix{background:rgba(255,255,255,.06);border-right-color:#3A3A3C;color:var(--green);}
+[data-theme="dark"] .field:not(:has(.locked))>label{color:#4CD964;}
+[data-theme="dark"] .icms-btn{background:#252527;border-color:#3A3A3C;color:#8E8E93;}
+[data-theme="dark"] .icms-btn.active{background:var(--green);border-color:var(--green);color:#fff;}
+[data-theme="dark"] .custo-result{background:#1C1C1E;border-color:#2C2C2E;}
+[data-theme="dark"] .custo-result::before{background:var(--green);}
+[data-theme="dark"] .cr-value{color:#F5F5F5;}
+[data-theme="dark"] .cr-tag{background:rgba(255,255,255,.06);border-color:#3A3A3C;color:var(--green);}
+[data-theme="dark"] .price-card{background:#1C1C1E;border-color:#2C2C2E;box-shadow:none;}
+[data-theme="dark"] .price-card::before{background:var(--green);}
+[data-theme="dark"] .price-card:hover{border-color:#3A3A3C;box-shadow:0 4px 20px rgba(0,0,0,.5);}
+[data-theme="dark"] .price-card .main-value{color:#F5F5F5;}
+[data-theme="dark"] .resultado-card{background:#1C1C1E;border-color:#2C2C2E;}
+[data-theme="dark"] .resultado-card::before{background:var(--blue);}
+[data-theme="dark"] .res-top{background:rgba(255,255,255,.03);border-color:#2C2C2E;}
+[data-theme="dark"] .res-big-pct{color:#F5F5F5;}
+[data-theme="dark"] .res-consol-val{color:#F5F5F5;}
+[data-theme="dark"] .target-btn{background:#1C1C1E;border-color:#3A3A3C;color:#8E8E93;}
+[data-theme="dark"] .target-btn.active{background:rgba(0,118,190,0.15);border-color:var(--blue);color:var(--blue);}
+[data-theme="dark"] .tipo-tab{background:#1C1C1E;border-color:#3A3A3C;}
+[data-theme="dark"] .tipo-tab.active{background:rgba(0,136,53,0.12);border-color:var(--green);}
+[data-theme="dark"] .cores-table th{background:#252527;color:var(--blue);}
+[data-theme="dark"] .cores-table tr:hover td{background:rgba(255,255,255,.03);}
+[data-theme="dark"] .hist-table th{background:#252527;}
+[data-theme="dark"] .hist-table tr:hover td{background:rgba(255,255,255,.03);}
+[data-theme="dark"] .modal{background:#1C1C1E;border-color:#3A3A3C;}
+[data-theme="dark"] .modal-btn.cancel{background:#252527;border-color:#3A3A3C;color:#8E8E93;}
+[data-theme="dark"] .mob-dropdown{background:#1C1C1E;border-color:#2C2C2E;box-shadow:0 8px 24px rgba(0,0,0,.5);}
+[data-theme="dark"] .mob-dropdown button{color:#8E8E93;}
+[data-theme="dark"] .mob-dropdown button.active{color:var(--green);background:rgba(0,136,53,.1);}
+[data-theme="dark"] .mob-dropdown button:hover{background:rgba(255,255,255,.05);color:#F5F5F5;}
+[data-theme="dark"] .divider{background:#2C2C2E;}
+[data-theme="dark"] .step-num{background:var(--green);}
+[data-theme="dark"] .save-cot-btn{border-color:#3A3A3C;color:var(--blue);}
+[data-theme="dark"] .res-row .rr-pct{background:#252527;}
+[data-theme="dark"] .footer{background:#1C1C1E;border-color:#2C2C2E;}
+[data-theme="dark"] body{background:#0A0A0A !important;color:#F5F5F5 !important;}
+[data-theme="dark"] .container{color:#F5F5F5;}
+[data-theme="dark"] .section-label{color:#8E8E93;}
+[data-theme="dark"] .step-title{color:#8E8E93;}
+[data-theme="dark"] .empty-state{color:#636366;}
+[data-theme="dark"] .mob-nav-trigger{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);}
+[data-theme="dark"] .version-badge{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;font-weight:300;min-height:100vh;transition:background .3s,color .3s;}
 @media(max-width:700px){body{zoom:0.85;}.splash,.login-screen,.modal-bg{zoom:1.176;}}/* 1/0.85 = 1.176 to counter body zoom on fixed elements */
@@ -73,7 +122,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 .header-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
 @media(max-width:700px){.header{padding:0 16px;}.header-system{display:none;}.header-right{gap:8px;}.version-badge{padding:2px 7px;font-size:.5rem;}}
 .version-badge{font-family:‘DM Mono’,monospace;font-size:.56rem;font-weight:500;letter-spacing:1px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.30);border-radius:5px;padding:3px 9px;}
-.theme-toggle{display:flex;align-items:center;gap:6px;padding:5px 11px;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.28);border-radius:20px;cursor:pointer;font-family:‘DM Mono’,monospace;font-size:.58rem;font-weight:500;color:rgba(255,255,255,.85);transition:all .2s;user-select:none;}
+.theme-toggle{display:flex;align-items:center;justify-content:center;width:34px;height:34px;padding:0;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.25);border-radius:50%;cursor:pointer;color:rgba(255,255,255,.85);transition:all .2s;user-select:none;}
 .theme-toggle:hover{background:rgba(255,255,255,.22);color:#fff;}
 .toggle-icon{display:flex;align-items:center;transition:transform .3s;}
 
@@ -123,12 +172,10 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 .field-row:focus-within{border-color:var(–green);box-shadow:0 0 0 3px var(–input-glow);}
 .field-row.locked{opacity:.45;pointer-events:none;background:var(–surface2);border:1.5px dashed var(–border);}
 .field-prefix{padding:10px 11px;font-family:‘DM Mono’,monospace;font-size:.7rem;color:var(–green);font-weight:500;background:rgba(0,136,53,0.08);border-right:1.5px solid var(–input-border);min-width:32px;text-align:center;}
-[data-theme=“dark”] .field-prefix{background:rgba(0,136,53,0.1);}
 .field-row.locked .field-prefix{color:var(–muted2);background:transparent;border-right-color:var(–border);}
 .field-row input,.field-row select{flex:1;background:transparent;border:none;outline:none;color:var(–text);font-family:‘DM Mono’,monospace;font-size:.88rem;padding:10px 13px;min-width:0;}
 .field-row select option{background:var(–surface);color:var(–text);}
 .field:not(:has(.locked))>label{color:var(–green);}
-[data-theme=“dark”] .field:not(:has(.locked))>label{color:#7aaa82;}
 
 /* ── ICMS BUTTONS ── */
 .icms-selector{display:flex;gap:7px;flex-wrap:wrap;}
@@ -139,12 +186,10 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 /* ── CUSTO RESULT ── */
 .custo-result{background:var(–surface);border:1.5px solid var(–border);border-radius:12px;padding:16px 18px;margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;overflow:hidden;}
 .custo-result::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;background:var(–green);border-radius:12px 12px 0 0;}
-[data-theme=“dark”] .custo-result{background:var(–surface);}
 .cr-label{font-family:‘Poppins’,sans-serif;font-size:.57rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(–muted);margin-bottom:4px;}
 .cr-value{font-family:‘DM Mono’,monospace;font-size:1.5rem;color:var(–text);line-height:1;font-weight:500;}
 .cr-sub{font-size:.55rem;color:var(–muted2);margin-top:3px;}
 .cr-tag{font-family:‘DM Mono’,monospace;font-size:.62rem;color:var(–green);background:rgba(0,136,53,0.07);border:1px solid rgba(0,136,53,0.18);border-radius:20px;padding:5px 12px;white-space:nowrap;font-weight:500;}
-[data-theme=“dark”] .cr-tag{background:rgba(0,136,53,0.1);border-color:rgba(0,136,53,0.25);}
 
 .divider{height:1.5px;background:var(–border);margin:28px 0;}
 .section-label{font-family:‘Poppins’,sans-serif;font-size:.58rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(–muted);margin-bottom:16px;}
@@ -153,8 +198,6 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 .price-card{background:var(–surface);border:1.5px solid var(–border);border-radius:12px;padding:16px 18px;display:inline-block;min-width:170px;transition:border-color .25s,box-shadow .25s;position:relative;overflow:hidden;}
 .price-card::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;background:var(–green);border-radius:12px 12px 0 0;}
 .price-card:hover{border-color:var(–green);box-shadow:0 4px 16px rgba(0,136,53,.10);}
-[data-theme=“dark”] .price-card{box-shadow:none;}
-[data-theme=“dark”] .price-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.35);}
 .price-card .badge{font-family:‘Poppins’,sans-serif;font-size:.57rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(–muted);margin-bottom:8px;display:flex;align-items:center;gap:5px;}
 .price-card .badge::before{content:’’;width:4px;height:4px;border-radius:50%;background:var(–green);flex-shrink:0;}
 .price-card .main-value{font-family:‘DM Mono’,monospace;font-size:1.7rem;line-height:1;color:var(–text);font-weight:500;}
@@ -165,7 +208,6 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 .resultado-card{background:var(–surface);border:1.5px solid var(–border);border-radius:12px;overflow:hidden;position:relative;}
 .resultado-card::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;background:var(–blue);border-radius:12px 12px 0 0;z-index:1;}
 .res-top{padding:18px 20px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:1px solid var(–border);background:rgba(0,118,190,0.04);}
-[data-theme=“dark”] .res-top{background:rgba(0,118,190,0.06);}
 .res-top-label{font-family:‘Poppins’,sans-serif;font-size:.57rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(–blue);margin-bottom:4px;display:flex;align-items:center;gap:5px;}
 .res-top-label::before{content:’’;width:4px;height:4px;border-radius:50%;background:var(–blue);flex-shrink:0;}
 .res-big-pct{font-family:‘DM Mono’,monospace;font-size:2.4rem;line-height:1;color:var(–text);letter-spacing:-1px;font-weight:500;}
@@ -187,7 +229,6 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 .target-btn{padding:7px 14px;background:var(–surface);border:1.5px solid var(–border);border-radius:6px;color:var(–muted);font-family:‘DM Mono’,monospace;font-size:.7rem;cursor:pointer;transition:all .15s;white-space:nowrap;box-shadow:var(–shadow-sm);}
 .target-btn:hover{border-color:var(–blue);color:var(–blue);}
 .target-btn.active{background:rgba(0,118,190,0.08);border-color:var(–blue);color:var(–blue);}
-[data-theme=“dark”] .target-btn.active{background:rgba(0,118,190,0.1);}
 @media(max-width:600px){.container{padding:24px 16px 60px;}.target-row{gap:5px;}.target-btn{padding:6px 10px;font-size:.62rem;}.target-label{font-size:.5rem;}.res-top{padding:14px 16px;flex-direction:column;align-items:flex-start;gap:8px;}.res-big-pct{font-size:2rem;}.res-consol-val{font-size:1.1rem;text-align:left;}.res-consol-sub{text-align:left;}.res-row{padding:10px 16px;}.price-card{min-width:0;padding:14px 16px;}.price-card .main-value{font-size:1.4rem;}.divider{margin:20px 0;}.step{margin-bottom:20px;}.custo-result{flex-direction:column;align-items:flex-start;gap:8px;}.cr-value{font-size:1.3rem;}}
 
 /* ── CUSTOS TAB ── */
@@ -203,13 +244,11 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 .tipo-tab{padding:7px 16px;background:var(–surface);border:1.5px solid var(–border);border-radius:6px;color:var(–muted);font-family:‘Poppins’,sans-serif;font-size:.68rem;font-weight:500;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:8px;box-shadow:var(–shadow-sm);}
 .tipo-tab:hover{border-color:var(–green);color:var(–green);}
 .tipo-tab.active{border-color:var(–green);color:var(–green);background:rgba(0,136,53,0.05);}
-[data-theme=“dark”] .tipo-tab.active{background:rgba(0,136,53,0.07);}
 .del-tipo{color:var(–muted);font-size:.7rem;padding:0 2px;cursor:pointer;line-height:1;}
 .del-tipo:hover{color:var(–red);}
 
 .cores-table{width:100%;border-collapse:collapse;}
 .cores-table th{font-family:‘Poppins’,sans-serif;font-size:.58rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(–blue);padding:8px 14px;text-align:left;border-bottom:1.5px solid var(–border);background:rgba(0,118,190,0.05);}
-[data-theme=“dark”] .cores-table th{background:rgba(0,118,190,0.07);}
 .cores-table td{padding:10px 14px;border-bottom:1px solid var(–border);font-size:.82rem;}
 .cores-table tr:last-child td{border-bottom:none;}
 .cores-table tr:hover td{background:rgba(0,136,53,0.03);}
@@ -224,7 +263,6 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);backdrop-filter:blur(3px);z-index:200;align-items:center;justify-content:center;}
 .modal-bg.open{display:flex;}
 .modal{background:var(–surface);border:1.5px solid var(–border2);border-radius:14px;padding:28px;width:360px;max-width:90vw;box-shadow:0 24px 64px rgba(0,0,0,0.25);}
-[data-theme=“dark”] .modal{box-shadow:0 24px 64px rgba(0,0,0,0.5);}
 .modal-title{font-family:‘Poppins’,sans-serif;font-size:.65rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(–muted);margin-bottom:20px;}
 .modal .field{margin-bottom:14px;}
 .modal-actions{display:flex;gap:10px;margin-top:20px;}
@@ -269,7 +307,6 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 /* ── HISTÓRICO TAB ── */
 .hist-table{width:100%;border-collapse:collapse;}
 .hist-table th{font-family:‘Poppins’,sans-serif;font-size:.55rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(–blue);padding:10px 12px;text-align:left;border-bottom:1.5px solid var(–border);background:rgba(0,118,190,.05);}
-[data-theme=“dark”] .hist-table th{background:rgba(0,118,190,.07);}
 .hist-table td{padding:10px 12px;border-bottom:1px solid var(–border);font-size:.76rem;color:var(–text);}
 .hist-table tr:hover td{background:rgba(0,136,53,.03);}
 .hist-table .ht-date{font-family:‘DM Mono’,monospace;font-size:.68rem;color:var(–muted);white-space:nowrap;}
@@ -307,7 +344,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     <div class="splash-sub">Formação de Preço</div>
   </div>
   <div class="splash-bar-wrap"><div class="splash-bar"></div></div>
-  <div class="splash-version" id="splash-version">v2.1.1</div>
+  <div class="splash-version" id="splash-version">v2.3.1</div>
 </div>
 
 <!-- LOGIN SCREEN -->
@@ -340,10 +377,9 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     </button>
   </div>
   <div class="header-right">
-    <div class="version-badge" id="app-version">v2.1.1</div>
+    <div class="version-badge" id="app-version">v2.3.1</div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Alternar tema">
-      <span class="toggle-icon" id="toggle-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></span>
-      <span id="toggle-label">Dark</span>
+      <span class="toggle-icon" id="toggle-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></span>
     </button>
   </div>
 </div>
@@ -684,9 +720,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 function applyTheme(dark){
   document.documentElement.setAttribute('data-theme',dark?'dark':'light');
   const icon=document.getElementById('toggle-icon');
-  const lbl=document.getElementById('toggle-label');
-  if(icon) icon.innerHTML=dark?'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>':'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>';
-  if(lbl) lbl.textContent=dark?'Light':'Dark';
+  if(icon) icon.innerHTML=dark?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>':'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>';
   localStorage.setItem('fiobras-theme',dark?'dark':'light');
 }
 function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?false:true);}
@@ -755,7 +789,7 @@ window._salvarCotacao=(dados)=>push(historicoRef,dados).catch(e=>console.error('
 <!-- ── APP LOGIC ── -->
 
 <script>
-const APP_VERSION='v2.1.1';
+const APP_VERSION='v2.3.1';
 const ICMS_FUNDOS=0.0318,PIS_COFINS_AL=0.0925,IRPJ_RATE=0.34;
 const cenariosVenda=[{label:'ICMS 17%',pis:0.013695,cofins:0.06308,cred:0.01295},{label:'ICMS 12%',pis:0.01452,cofins:0.06688,cred:0.008325},{label:'ICMS 7%',pis:0.015345,cofins:0.07068,cred:0.0037},{label:'ICMS 4%',pis:0.01584,cofins:0.07296,cred:0.000925}];
 const cenariosServico=[{label:'Dentro do Estado',pis:0.0165,cofins:0.076,cred:0,icmsFundos:0},{label:'Fora do Estado',pis:0.01452,cofins:0.06688,cred:0.008325,icmsFundos:0.0318}];
