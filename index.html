@@ -118,7 +118,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 /* ── FIELD ── */
 .field{display:flex;flex-direction:column;}
 .field label{font-family:‘Poppins’,sans-serif;font-size:.57rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(–muted);margin-bottom:6px;min-height:18px;}
-.field-row{display:flex;align-items:center;background:var(–input-bg);border:1.5px solid var(–input-border);border-radius:8px;overflow:hidden;transition:border-color .2s,box-shadow .2s;flex:1;}
+.field-row{display:flex;align-items:center;background:#fff;border:1.5px solid #C5DDD0;border-radius:8px;overflow:hidden;transition:border-color .2s,box-shadow .2s;flex:1;}
 .field-row:focus-within{border-color:var(–green);box-shadow:0 0 0 3px var(–input-glow);}
 .field-row.locked{opacity:.45;pointer-events:none;background:var(–surface2);border:1.5px dashed var(–border);}
 .field-prefix{padding:10px 11px;font-family:‘DM Mono’,monospace;font-size:.7rem;color:var(–green);font-weight:500;background:rgba(0,136,53,0.08);border-right:1.5px solid var(–input-border);min-width:32px;text-align:center;}
@@ -192,7 +192,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 /* ── CUSTOS TAB ── */
 .custos-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
 .add-btn{display:flex;align-items:center;gap:7px;padding:9px 18px;background:var(–green);border:none;border-radius:7px;color:#fff;font-family:‘Poppins’,sans-serif;font-size:.65rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;box-shadow:0 2px 8px rgba(0,136,53,.2);}
-.add-btn:hover{background:var(–green2);}
+.add-btn:hover{background:#006828;}
 .save-btn{display:flex;align-items:center;gap:7px;padding:9px 20px;background:transparent;border:2px solid var(–yellow);border-radius:7px;color:var(–yellow);font-family:‘Poppins’,sans-serif;font-size:.65rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;}
 .save-btn:hover{background:rgba(255,203,0,0.1);}
 .save-btn.salvando{border-color:var(–muted);color:var(–muted);cursor:default;}
@@ -229,9 +229,9 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 .modal-actions{display:flex;gap:10px;margin-top:20px;}
 .modal-btn{flex:1;padding:10px;border-radius:7px;border:none;cursor:pointer;font-family:‘Poppins’,sans-serif;font-size:.68rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:all .15s;}
 .modal-btn.confirm{background:var(–green);color:#fff;}
-.modal-btn.confirm:hover{background:var(–green2);}
+.modal-btn.confirm:hover{background:#006828;}
 .modal-btn.cancel{background:var(–surface2);color:var(–muted);border:1.5px solid var(–border);}
-.modal-btn.cancel:hover{color:var(–text);border-color:var(–green);}
+.modal-btn.cancel:hover{color:var(–text);border-color:#008835;}
 
 /* ── FOOTER ── */
 .footer{background:var(–surface);border-top:1px solid var(–border);padding:0 32px;height:44px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
@@ -243,20 +243,20 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 /* ── LOGIN SCREEN ── */
 .login-screen{position:fixed;inset:0;z-index:9998;background:#008835;display:flex;align-items:flex-end;justify-content:center;}
 .login-card{background:#fff;width:100%;max-width:420px;border-radius:24px 24px 0 0;padding:36px 28px 40px;box-shadow:0 -8px 40px rgba(0,0,0,.2);}
-.login-title{font-family:‘Poppins’,sans-serif;font-size:1.1rem;font-weight:700;color:var(–text);margin-bottom:4px;}
-.login-sub{font-family:‘DM Mono’,monospace;font-size:.6rem;color:var(–muted);letter-spacing:1px;margin-bottom:24px;}
+.login-title{font-family:‘Poppins’,sans-serif;font-size:1.1rem;font-weight:700;color:#1A2E1E;margin-bottom:4px;}
+.login-sub{font-family:‘DM Mono’,monospace;font-size:.6rem;color:#567A5E;letter-spacing:1px;margin-bottom:24px;}
 .login-users{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
-.login-user-btn{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(–surface2);border:1.5px solid var(–border);border-radius:10px;cursor:pointer;transition:all .15s;font-family:‘Poppins’,sans-serif;font-size:.82rem;font-weight:500;color:var(–text);}
-.login-user-btn:hover{border-color:var(–green);background:rgba(0,136,53,.05);}
-.login-user-btn .user-avatar{width:36px;height:36px;border-radius:50%;background:var(–green);color:#fff;display:flex;align-items:center;justify-content:center;font-family:‘Poppins’,sans-serif;font-size:.72rem;font-weight:700;flex-shrink:0;}
-.login-divider{display:flex;align-items:center;gap:12px;margin:18px 0;font-size:.6rem;color:var(–muted2);letter-spacing:2px;text-transform:uppercase;}
-.login-divider::before,.login-divider::after{content:’’;flex:1;height:1px;background:var(–border);}
+.login-user-btn{display:flex;align-items:center;gap:12px;padding:14px 18px;background:#F5FAF7;border:1.5px solid #D4E4DA;border-radius:10px;cursor:pointer;transition:all .15s;font-family:‘Poppins’,sans-serif;font-size:.82rem;font-weight:500;color:#1A2E1E;}
+.login-user-btn:hover{border-color:#008835;background:rgba(0,136,53,.05);}
+.login-user-btn .user-avatar{width:36px;height:36px;border-radius:50%;background:#008835;color:#fff;display:flex;align-items:center;justify-content:center;font-family:‘Poppins’,sans-serif;font-size:.72rem;font-weight:700;flex-shrink:0;}
+.login-divider{display:flex;align-items:center;gap:12px;margin:18px 0;font-size:.6rem;color:#8AAF92;letter-spacing:2px;text-transform:uppercase;}
+.login-divider::before,.login-divider::after{content:’’;flex:1;height:1px;background:#D4E4DA;}
 .login-admin{display:flex;gap:8px;}
-.login-admin input{flex:1;padding:12px 14px;background:var(–input-bg);border:1.5px solid var(–input-border);border-radius:8px;font-family:‘DM Mono’,monospace;font-size:.8rem;color:var(–text);outline:none;}
-.login-admin input:focus{border-color:var(–green);}
-.login-admin button{padding:12px 20px;background:var(–green);border:none;border-radius:8px;color:#fff;font-family:‘Poppins’,sans-serif;font-size:.65rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
-.login-admin button:hover{background:var(–green2);}
-.login-error{font-size:.65rem;color:var(–red);margin-top:8px;min-height:18px;}
+.login-admin input{flex:1;padding:12px 14px;background:#fff;border:1.5px solid #C5DDD0;border-radius:8px;font-family:‘DM Mono’,monospace;font-size:.8rem;color:#1A2E1E;outline:none;}
+.login-admin input:focus{border-color:#008835;}
+.login-admin button{padding:12px 20px;background:#008835;border:none;border-radius:8px;color:#fff;font-family:‘Poppins’,sans-serif;font-size:.65rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
+.login-admin button:hover{background:#006828;}
+.login-error{font-size:.65rem;color:#C0392B;margin-top:8px;min-height:18px;}
 .login-screen.hide{display:none;}
 @media(min-width:700px){.login-screen{align-items:center;}.login-card{border-radius:16px;max-width:380px;box-shadow:0 12px 48px rgba(0,0,0,.3);}}
 
@@ -276,8 +276,8 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 .hist-table .ht-price{font-family:‘DM Mono’,monospace;font-weight:500;color:var(–green);}
 .hist-empty{text-align:center;padding:40px;color:var(–muted);font-size:.8rem;}
 .hist-filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
-.hist-filters input{padding:8px 12px;background:var(–input-bg);border:1.5px solid var(–input-border);border-radius:7px;font-family:‘DM Mono’,monospace;font-size:.72rem;color:var(–text);outline:none;min-width:160px;}
-.hist-filters input:focus{border-color:var(–green);}
+.hist-filters input{padding:8px 12px;background:#fff;border:1.5px solid #C5DDD0;border-radius:7px;font-family:‘DM Mono’,monospace;font-size:.72rem;color:var(–text);outline:none;min-width:160px;}
+.hist-filters input:focus{border-color:#008835;}
 
 /* ── SPLASH SCREEN ── */
 .splash{position:fixed;inset:0;z-index:9999;background:#008835;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .4s,visibility .4s;}
@@ -306,7 +306,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     <div class="splash-sub">Formação de Preço</div>
   </div>
   <div class="splash-bar-wrap"><div class="splash-bar"></div></div>
-  <div class="splash-version" id="splash-version">v2.0.3</div>
+  <div class="splash-version" id="splash-version">v2.1.0</div>
 </div>
 
 <!-- LOGIN SCREEN -->
@@ -339,7 +339,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     </button>
   </div>
   <div class="header-right">
-    <div class="version-badge" id="app-version">v2.0.3</div>
+    <div class="version-badge" id="app-version">v2.1.0</div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Alternar tema">
       <span class="toggle-icon" id="toggle-icon">🌙</span>
       <span id="toggle-label">Escuro</span>
@@ -613,7 +613,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 <div class="container">
   <div class="custos-header">
     <div class="section-label" style="margin-bottom:0">Tipos de fio · Cores · Custos de tingimento</div>
-    <div style="display:flex;gap:8px;align-items:center">
+    <div id="custos-admin-btns" style="display:flex;gap:8px;align-items:center">
       <button class="save-btn" id="btnSalvar" onclick="salvarManual()">Salvar alterações</button>
     </div>
   </div>
@@ -754,7 +754,7 @@ window._salvarCotacao=(dados)=>push(historicoRef,dados).catch(e=>console.error('
 <!-- ── APP LOGIC ── -->
 
 <script>
-const APP_VERSION='v2.0.3';
+const APP_VERSION='v2.1.0';
 const ICMS_FUNDOS=0.0318,PIS_COFINS_AL=0.0925,IRPJ_RATE=0.34;
 const cenariosVenda=[{label:'ICMS 17%',pis:0.013695,cofins:0.06308,cred:0.01295},{label:'ICMS 12%',pis:0.01452,cofins:0.06688,cred:0.008325},{label:'ICMS 7%',pis:0.015345,cofins:0.07068,cred:0.0037},{label:'ICMS 4%',pis:0.01584,cofins:0.07296,cred:0.000925}];
 const cenariosServico=[{label:'Dentro do Estado',pis:0.0165,cofins:0.076,cred:0,icmsFundos:0},{label:'Fora do Estado',pis:0.01452,cofins:0.06688,cred:0.008325,icmsFundos:0.0318}];
@@ -766,7 +766,7 @@ let isAdmin=false;
 function loginUser(name){currentUser=name;isAdmin=false;document.getElementById('loginScreen').classList.add('hide');showApp();}
 function loginAdmin(){const pass=document.getElementById('adminPass').value;if(pass==='admin'){currentUser='Admin';isAdmin=true;document.getElementById('loginScreen').classList.add('hide');showApp();}else{document.getElementById('loginError').textContent='Senha incorreta';setTimeout(()=>{document.getElementById('loginError').textContent='';},2500);}}
 function showApp(){document.getElementById('appHeader').style.display='';document.getElementById('appTabs').style.display='';document.getElementById('appFooter').style.display='';document.querySelectorAll('.mob-overlay,.mob-dropdown').forEach(el=>el.style.removeProperty('display'));switchTab('vendas',document.querySelector('.tab-btn'));}
-function canAccessTab(tab){if(isAdmin)return true;if(tab==='custos')return false;return true;}
+function canAccessTab(tab){return true;}
 
 let MULTIPLICADORES={'CV':[1.25,1.25,1.25,1.25,1.25,1.25,1.25],'CANCUN':[1.30,1.30,1.30,1.30,1.30,1.30,1.30],'PES':[1.10,0.90,0.90,0.90,0.90,0.90,0.90],'FILAMENTO':[1.20,1.00,1.00,1.00,1.00,1.00,1.00],'PAC':[0.90,0.80,0.60,0.60,0.60,0.60,0.60],'COTONCRYL':[1.10,1.50,1.80,1.80,1.80,2.00,1.80]};
 let multEditando=false;
@@ -776,7 +776,7 @@ let cadastro={'CO':[{cor:'Branco',custo:6.20},{cor:'Claro',custo:8.00},{cor:'Mé
 recalcularDerivados();
 
 function salvarCadastro(){recalcularDerivados();if(window._salvarFirebase){window._salvarFirebase();}else{window._pendingSave=true;}populaTipos();populaTingTipos();}
-function salvarManual(){const btn=document.getElementById('btnSalvar');if(!btn)return;btn.textContent='Salvando...';btn.classList.add('salvando');btn.classList.remove('salvo');btn.disabled=true;const done=()=>{btn.textContent='Salvo ✓';btn.classList.remove('salvando');btn.classList.add('salvo');btn.disabled=false;setTimeout(()=>{btn.textContent='Salvar alterações';btn.classList.remove('salvo');},2500);};const fail=()=>{btn.textContent='Erro';btn.classList.remove('salvando');btn.disabled=false;setTimeout(()=>{btn.textContent='Salvar alterações';},3000);};if(window._salvarFirebase){window._salvarFirebase().then(done).catch(fail);}else{window._pendingSave=true;fail();}}
+function salvarManual(){if(!isAdmin)return;const btn=document.getElementById('btnSalvar');if(!btn)return;btn.textContent='Salvando...';btn.classList.add('salvando');btn.classList.remove('salvo');btn.disabled=true;const done=()=>{btn.textContent='Salvo ✓';btn.classList.remove('salvando');btn.classList.add('salvo');btn.disabled=false;setTimeout(()=>{btn.textContent='Salvar alterações';btn.classList.remove('salvo');},2500);};const fail=()=>{btn.textContent='Erro';btn.classList.remove('salvando');btn.disabled=false;setTimeout(()=>{btn.textContent='Salvar alterações';},3000);};if(window._salvarFirebase){window._salvarFirebase().then(done).catch(fail);}else{window._pendingSave=true;fail();}}
 function g(id){return parseFloat(document.getElementById(id).value)||0;}
 function fmtR(v){return'R$ '+Math.abs(v).toFixed(2).replace('.',',');}
 function fmtPct(v){return(v*100).toFixed(1)+'%';}
@@ -841,11 +841,21 @@ function calcPreparacao(){const custoHora=parseFloat(document.getElementById('pp
 
 function renderCustosTab(){const tipos=Object.keys(cadastro);if(!tipoAtivo||!cadastro[tipoAtivo])tipoAtivo=tipos[0]||null;const ordemTipos=['CO',...Object.keys(MULTIPLICADORES).filter(t=>cadastro[t])];const tiposDisponiveis=ordemTipos.filter(t=>cadastro[t]);document.getElementById('tipoTabs').innerHTML=tiposDisponiveis.length?tiposDisponiveis.map(t=>{const isDeriv=t!=='CO';const badge=isDeriv?'<span style="font-size:0.5rem;opacity:0.5;margin-left:3px">auto</span>':'';const del=!isDeriv?'<span class="del-tipo" onclick="event.stopPropagation();deletarTipo(\''+t+'\')">✕</span>':'';return'<div class="tipo-tab '+(t===tipoAtivo?'active':'')+'" onclick="selecionarTipo(\''+t+'\')">'+t+badge+del+'</div>';}).join(''):'<span style="font-size:0.75rem;color:var(--muted)">Nenhum tipo cadastrado</span>';const area=document.getElementById('coresArea');if(!tipoAtivo){area.innerHTML='<div class="empty-state">Adicione um tipo de fio para começar.</div>';return;}const isDeriv=tipoAtivo!=='CO';const cores=cadastro[tipoAtivo]||[];const coBase=cadastro['CO']||[];const mults=MULTIPLICADORES[tipoAtivo]?[...MULTIPLICADORES[tipoAtivo]]:[];if(isDeriv){area.innerHTML='<div style="margin-bottom:12px;padding:10px 16px;background:rgba(0,136,53,0.06);border:1.5px solid var(--border);border-radius:8px;font-size:0.72rem;color:var(--muted);display:flex;align-items:center;justify-content:space-between;gap:12px"><span>Valores calculados a partir do <strong style="color:var(--accent)">CO</strong>. '+(multEditando?'<strong style="color:var(--yellow)">Editando…</strong>':'Clique no cadeado para ajustar.')+'</span><button onclick="toggleMultEdit()" style="background:none;border:none;cursor:pointer;font-size:1.1rem;padding:2px 6px;color:'+(multEditando?'var(--yellow)':'var(--muted)')+'">'+(multEditando?'🔓':'🔒')+'</button></div><table class="cores-table"><thead><tr><th>Cor</th><th>Base CO</th><th>Mult</th><th>Calculado</th></tr></thead><tbody>'+cores.map((c,i)=>{const mult=mults[Math.min(i,mults.length-1)];const custoCO=coBase[i]?coBase[i].custo:0;const pct=(mult*100).toFixed(0);const multCell=multEditando?'<input id="mult-inp-'+i+'" type="number" value="'+pct+'" min="1" max="999" step="1" style="width:60px;padding:4px 6px;background:rgba(255,203,0,0.08);border:1.5px solid var(--yellow);border-radius:5px;color:var(--yellow);font-family:DM Mono,monospace;font-size:.78rem;outline:none;text-align:center" oninput="previewMult('+i+',this.value)">%':'<span style="font-family:DM Mono,monospace;font-size:.72rem;color:var(--yellow);background:rgba(255,203,0,0.08);padding:2px 7px;border-radius:4px">'+pct+'%</span>';return'<tr><td>'+c.cor+'</td><td style="color:var(--muted)">R$ '+custoCO.toFixed(2).replace('.',',')+'</td><td>'+multCell+'</td><td id="mult-val-'+i+'" style="font-family:DM Mono,monospace;color:var(--accent);font-weight:500">R$ '+c.custo.toFixed(2).replace('.',',')+'</td></tr>';}).join('')+'</tbody></table>';}else{area.innerHTML='<table class="cores-table"><thead><tr><th>Cor</th><th>Custo Tingimento (R$)</th><th class="td-del"></th></tr></thead><tbody>'+cores.map((c,i)=>'<tr><td><input type="text" value="'+c.cor+'" onchange="editarCor(\'CO\','+i+',\'cor\',this.value)"></td><td><input type="number" value="'+c.custo.toFixed(2)+'" step="0.01" min="0" onchange="editarCor(\'CO\','+i+',\'custo\',this.value)"></td><td class="td-del"><button class="del-btn" onclick="deletarCor(\'CO\','+i+')">✕</button></td></tr>').join('')+'</tbody></table><div style="margin-top:14px"><button class="add-btn" onclick="abrirModalCor()">+ Nova cor</button></div>';}}
 function previewMult(idx,val){const pct=parseFloat(val)||0;const mult=pct/100;const coBase=cadastro['CO']||[];const custoCO=coBase[idx]?coBase[idx].custo:0;const calc=custoCO*mult;const el=document.getElementById('mult-val-'+idx);if(el)el.textContent='R$ '+calc.toFixed(2).replace('.',',');}
-function toggleMultEdit(){if(!multEditando){multEditando=true;renderCustosTab();}else{const coBase=cadastro['CO']||[];const mults=MULTIPLICADORES[tipoAtivo];coBase.forEach((_,i)=>{const inp=document.getElementById('mult-inp-'+i);if(inp){const novoMult=parseFloat(inp.value)/100;if(!isNaN(novoMult)&&novoMult>0)mults[Math.min(i,mults.length-1)]=novoMult;}});MULTIPLICADORES[tipoAtivo]=mults;multEditando=false;recalcularDerivados();if(window._salvarMultiplicadores)window._salvarMultiplicadores();salvarCadastro();renderCustosTab();populaTipos();}}
+function toggleMultEdit(){if(!isAdmin)return;if(!multEditando){multEditando=true;renderCustosTab();}else{const coBase=cadastro['CO']||[];const mults=MULTIPLICADORES[tipoAtivo];coBase.forEach((_,i)=>{const inp=document.getElementById('mult-inp-'+i);if(inp){const novoMult=parseFloat(inp.value)/100;if(!isNaN(novoMult)&&novoMult>0)mults[Math.min(i,mults.length-1)]=novoMult;}});MULTIPLICADORES[tipoAtivo]=mults;multEditando=false;recalcularDerivados();if(window._salvarMultiplicadores)window._salvarMultiplicadores();salvarCadastro();renderCustosTab();populaTipos();}}
 function selecionarTipo(t){tipoAtivo=t;multEditando=false;renderCustosTab();}
-function deletarTipo(t){if(t!=='CO'){alert('Tipos derivados não podem ser removidos.');return;}if(!confirm('Remover todas as cores do CO?'))return;cadastro['CO']=[];recalcularDerivados();salvarCadastro();renderCustosTab();populaTipos();}
-function editarCor(tipo,idx,campo,val){if(tipo!=='CO')return;cadastro['CO'][idx][campo]=campo==='custo'?parseFloat(val)||0:val;recalcularDerivados();salvarCadastro();populaTipos();if(tipoAtivo!=='CO')renderCustosTab();}
-function deletarCor(tipo,idx){if(tipo!=='CO')return;cadastro['CO'].splice(idx,1);recalcularDerivados();salvarCadastro();renderCustosTab();populaTipos();}
+// Wrap renderCustosTab to enforce admin-only editing
+const _origRenderCustos=renderCustosTab;
+renderCustosTab=function(){_origRenderCustos();applyCustosPermissions();};
+function applyCustosPermissions(){
+  const ab=document.getElementById('custos-admin-btns');if(ab)ab.style.display=isAdmin?'':'none';
+  if(!isAdmin){
+    document.querySelectorAll('#coresArea input,#coresArea .del-btn,#coresArea .add-btn,#coresArea button[onclick*="toggleMultEdit"]').forEach(el=>{el.disabled=true;el.style.pointerEvents='none';el.style.opacity='0.4';});
+    document.querySelectorAll('#tipoTabs .del-tipo').forEach(el=>{el.style.display='none';});
+  }
+}
+function deletarTipo(t){if(!isAdmin)return;if(t!=='CO'){alert('Tipos derivados não podem ser removidos.');return;}if(!confirm('Remover todas as cores do CO?'))return;cadastro['CO']=[];recalcularDerivados();salvarCadastro();renderCustosTab();populaTipos();}
+function editarCor(tipo,idx,campo,val){if(!isAdmin)return;if(tipo!=='CO')return;cadastro['CO'][idx][campo]=campo==='custo'?parseFloat(val)||0:val;recalcularDerivados();salvarCadastro();populaTipos();if(tipoAtivo!=='CO')renderCustosTab();}
+function deletarCor(tipo,idx){if(!isAdmin)return;if(tipo!=='CO')return;cadastro['CO'].splice(idx,1);recalcularDerivados();salvarCadastro();renderCustosTab();populaTipos();}
 function abrirModalTipo(){document.getElementById('modal-tipo-nome').value='';document.getElementById('modalTipo').classList.add('open');setTimeout(()=>document.getElementById('modal-tipo-nome').focus(),50);}
 function abrirModalCor(){document.getElementById('modal-cor-nome').value='';document.getElementById('modal-cor-custo').value='';document.getElementById('modalCor').classList.add('open');setTimeout(()=>document.getElementById('modal-cor-nome').focus(),50);}
 function fecharModal(id){document.getElementById(id).classList.remove('open');}
