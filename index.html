@@ -137,14 +137,14 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 .mob-nav-trigger:hover{background:rgba(255,255,255,.25);}
 .mob-nav-trigger .chevron{font-size:.55rem;transition:transform .2s;opacity:.7;}
 .mob-nav-trigger.open .chevron{transform:rotate(180deg);}
-.mob-dropdown{display:none;position:fixed;top:52px;left:0;right:0;z-index:98;background:var(–surface);border-bottom:2px solid var(–border);box-shadow:0 8px 24px rgba(0,0,0,.15);padding:6px 0;}
+.mob-dropdown{display:none;position:fixed;top:52px;left:0;right:0;z-index:98;background:#FFFFFF;border-bottom:2px solid #D4E4DA;box-shadow:0 8px 24px rgba(0,0,0,.18);padding:6px 0;}
 .mob-dropdown.open{display:block;animation:dropIn .2s ease;}
 @keyframes dropIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 .mob-dropdown button{display:flex;align-items:center;gap:10px;width:100%;padding:13px 22px;background:none;border:none;text-align:left;font-family:‘Poppins’,sans-serif;font-size:.74rem;font-weight:500;color:var(–muted);cursor:pointer;transition:all .15s;letter-spacing:.5px;}
 .mob-dropdown button:hover{background:rgba(0,136,53,.05);color:var(–green);}
 .mob-dropdown button.active{color:var(–green);font-weight:700;background:rgba(0,136,53,.06);border-left:3px solid var(–green);}
 .mob-dropdown button .dd-icon{font-size:.9rem;opacity:.6;width:20px;text-align:center;}
-.mob-overlay{display:none;position:fixed;inset:0;z-index:97;background:rgba(0,0,0,.25);}
+.mob-overlay{display:none;position:fixed;inset:0;z-index:97;background:rgba(0,0,0,.35);}
 .mob-overlay.open{display:block;}
 @media(max-width:700px){.tabs{display:none;}.mob-nav-trigger{display:flex;}.header-brand{font-size:1rem;}}
 
@@ -344,7 +344,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     <div class="splash-sub">Formação de Preço</div>
   </div>
   <div class="splash-bar-wrap"><div class="splash-bar"></div></div>
-  <div class="splash-version" id="splash-version">v2.4.1</div>
+  <div class="splash-version" id="splash-version">v2.5.1</div>
 </div>
 
 <!-- LOGIN SCREEN -->
@@ -377,7 +377,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     </button>
   </div>
   <div class="header-right">
-    <div class="version-badge" id="app-version">v2.4.1</div>
+    <div class="version-badge" id="app-version">v2.5.1</div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Alternar tema">
       <span class="toggle-icon" id="toggle-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></span>
     </button>
@@ -663,7 +663,10 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
 
 <div class="panel" id="panel-historico">
 <div class="container">
-  <div class="section-label">Histórico de cotações</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+    <div class="section-label" style="margin-bottom:0">Histórico de cotações</div>
+    <button class="add-btn" id="hist-add-btn" onclick="abrirAdicionarManual()" style="display:none">+ Adicionar</button>
+  </div>
   <div class="hist-filters">
     <input type="text" id="hist-search" placeholder="Buscar empresa ou produto..." oninput="renderHistorico()">
   </div>
@@ -708,8 +711,8 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     <div class="field"><label>Cor</label><div class="field-row locked"><input type="text" id="modal-cot-cor" readonly></div></div>
     <div class="field"><label>Título (ex: 20/1, 30/1)</label><div class="field-row"><input type="text" id="modal-cot-titulo" placeholder="20/1"></div></div>
     <div class="field"><label>Tipo do fio</label><div class="field-row"><select id="modal-cot-tipofio"><option value="">Selecione...</option></select></div></div>
+    <div class="field" id="modal-cot-preco-field" style="display:none"><label>Preço (R$)</label><div class="field-row"><span class="field-prefix">R$</span><input type="number" id="modal-cot-preco" step="0.01" min="0" value="0"></div></div>
     <input type="hidden" id="modal-cot-aba">
-    <input type="hidden" id="modal-cot-preco">
     <div class="modal-actions">
       <button class="modal-btn cancel" onclick="fecharModal('modalCotacao')">Cancelar</button>
       <button class="modal-btn confirm" onclick="confirmarSalvarCotacao()">Salvar</button>
@@ -736,7 +739,7 @@ window.addEventListener('DOMContentLoaded',function(){setTimeout(function(){var 
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getDatabase, ref, onValue, set, push } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+import { getDatabase, ref, onValue, set, push, remove, child } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
 const firebaseConfig = {
   apiKey:"AIzaSyCv2YsaTAj38o55M8nBbZ_3s939XWLAmM4",authDomain:"fiobras-preco.firebaseapp.com",
@@ -783,16 +786,18 @@ if(window._pendingSave){window._salvarFirebase();window._pendingSave=false;}
 window._historicoData=[];
 onValue(historicoRef,(snapshot)=>{
   const val=snapshot.val();
-  window._historicoData=val?Object.values(val).sort((a,b)=>b.timestamp-a.timestamp):[];
+  if(val){window._historicoData=Object.entries(val).map(([k,v])=>({...v,_key:k})).sort((a,b)=>b.timestamp-a.timestamp);}else{window._historicoData=[];}
   if(typeof renderHistorico==='function')renderHistorico();
 });
 window._salvarCotacao=(dados)=>push(historicoRef,dados).catch(e=>console.error('Erro ao salvar cotação:',e));
+window._deletarCotacao=(key)=>remove(child(historicoRef,key)).catch(e=>console.error('Erro ao deletar:',e));
+window._editarCotacao=(key,dados)=>set(child(historicoRef,key),dados).catch(e=>console.error('Erro ao editar:',e));
 </script>
 
 <!-- ── APP LOGIC ── -->
 
 <script>
-const APP_VERSION='v2.4.1';
+const APP_VERSION='v2.5.1';
 const ICMS_FUNDOS=0.0318,PIS_COFINS_AL=0.0925,IRPJ_RATE=0.34;
 const cenariosVenda=[{label:'ICMS 17%',pis:0.013695,cofins:0.06308,cred:0.01295},{label:'ICMS 12%',pis:0.01452,cofins:0.06688,cred:0.008325},{label:'ICMS 7%',pis:0.015345,cofins:0.07068,cred:0.0037},{label:'ICMS 4%',pis:0.01584,cofins:0.07296,cred:0.000925}];
 const cenariosServico=[{label:'Dentro do Estado',pis:0.0165,cofins:0.076,cred:0,icmsFundos:0},{label:'Fora do Estado',pis:0.01452,cofins:0.06688,cred:0.008325,icmsFundos:0.0318}];
@@ -839,6 +844,7 @@ function renderResultado(elId,r,abaName){
 }
 
 // ── SALVAR COTAÇÃO ──
+let _editKey=null;
 const TIPOS_FIO={
   'CO':['Penteado','Cardado','Open End'],
   'CV':['Penteado','Cardado','Open End'],
@@ -862,17 +868,21 @@ function getAbaFibraCor(aba){
   return{fibra,cor};
 }
 function abrirSalvarCotacao(aba){
+  _editKey=null;
   const{fibra,cor}=getAbaFibraCor(aba);
   document.getElementById('modal-cot-empresa').value='';
   document.getElementById('modal-cot-fibra').value=fibra||'—';
+  document.getElementById('modal-cot-fibra').setAttribute('readonly',true);
+  document.getElementById('modal-cot-fibra').parentElement.classList.add('locked');
   document.getElementById('modal-cot-cor').value=cor||'—';
+  document.getElementById('modal-cot-cor').setAttribute('readonly',true);
+  document.getElementById('modal-cot-cor').parentElement.classList.add('locked');
   document.getElementById('modal-cot-titulo').value='';
   document.getElementById('modal-cot-aba').value=aba||'';
-  // Popula dropdown tipo do fio
   const sel=document.getElementById('modal-cot-tipofio');
   const opcoes=TIPOS_FIO[fibra]||['Padrão'];
   sel.innerHTML='<option value="">Selecione...</option>'+opcoes.map(o=>'<option value="'+o+'">'+o+'</option>').join('');
-  document.getElementById('modalCotacao').classList.add('open');
+  document.getElementById('modal-cot-preco-field').style.display='none';document.getElementById('modalCotacao').classList.add('open');
   setTimeout(()=>document.getElementById('modal-cot-empresa').focus(),50);
 }
 function confirmarSalvarCotacao(){
@@ -885,24 +895,86 @@ function confirmarSalvarCotacao(){
   if(!empresa){alert('Preencha a empresa.');return;}
   if(!titulo){alert('Preencha o título (ex: 20/1).');return;}
   if(!tipofio){alert('Selecione o tipo do fio.');return;}
-  const info=_lastPreco[aba]||{};const precoVal=info.vLiq||0;const now=new Date();
+  const precoVal=parseFloat(document.getElementById('modal-cot-preco').value)||(_lastPreco[aba]||{}).vLiq||0;
+  const now=new Date();
   const produto=fibra+' '+cor+' '+titulo+' '+tipofio;
   const dados={timestamp:now.getTime(),data:now.toLocaleDateString('pt-BR'),hora:now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),usuario:currentUser||'—',empresa:empresa,fibra:fibra,cor:cor,titulo:titulo,tipofio:tipofio,produto:produto,aba:aba,preco:precoVal,precoFmt:'R$ '+precoVal.toFixed(2).replace('.',',')};
-  if(window._salvarCotacao){window._salvarCotacao(dados);}
+  if(_editKey&&window._editarCotacao){window._editarCotacao(_editKey,dados);}
+  else if(window._salvarCotacao){window._salvarCotacao(dados);}
+  _editKey=null;
+  // Re-lock fibra/cor fields
+  document.getElementById('modal-cot-fibra').setAttribute('readonly',true);
+  document.getElementById('modal-cot-fibra').parentElement.classList.add('locked');
+  document.getElementById('modal-cot-cor').setAttribute('readonly',true);
+  document.getElementById('modal-cot-cor').parentElement.classList.add('locked');
   fecharModal('modalCotacao');
 }
 
 // ── HISTÓRICO ──
 function renderHistorico(){
   const area=document.getElementById('histArea');if(!area)return;
+  // Show/hide admin add button
+  const addBtn=document.getElementById('hist-add-btn');if(addBtn)addBtn.style.display=isAdmin?'':'none';
   const data=window._historicoData||[];
   const search=(document.getElementById('hist-search')?.value||'').toLowerCase();
   const filtered=search?data.filter(d=>(d.empresa||'').toLowerCase().includes(search)||(d.produto||'').toLowerCase().includes(search)||(d.fibra||'').toLowerCase().includes(search)):data;
   if(!filtered.length){area.innerHTML='<div class="hist-empty">Nenhuma cotação salva ainda.</div>';return;}
-  area.innerHTML='<div style="overflow-x:auto"><table class="hist-table"><thead><tr><th>Data</th><th>Empresa</th><th>Produto</th><th>Aba</th><th>Preço</th><th>Usuário</th></tr></thead><tbody>'+filtered.map(d=>{
+  const adminCol=isAdmin?'<th style="width:70px"></th>':'';
+  area.innerHTML='<div style="overflow-x:auto"><table class="hist-table"><thead><tr><th>Data</th><th>Empresa</th><th>Produto</th><th>Aba</th><th>Preço</th><th>Usuário</th>'+adminCol+'</tr></thead><tbody>'+filtered.map(d=>{
     const prod=d.produto||(d.fibra?d.fibra+' '+d.cor+' '+(d.titulo||'')+' '+(d.tipofio||''):'—');
-    return'<tr><td class="ht-date">'+(d.data||'—')+'<br><span style="opacity:.6">'+(d.hora||'')+'</span></td><td style="font-weight:500">'+(d.empresa||'—')+'</td><td><span style="color:var(--green);font-weight:600">'+(d.fibra||'')+'</span> '+(d.cor||'')+'<br><span style="font-family:DM Mono,monospace;font-size:.68rem">'+(d.titulo||'')+' <span style="color:var(--muted);font-size:.62rem">'+(d.tipofio||'')+'</span></span></td><td style="font-size:.62rem;color:var(--muted);text-transform:capitalize">'+(d.aba||'—')+'</td><td class="ht-price">'+(d.precoFmt||'—')+'</td><td class="ht-user">'+(d.usuario||'—')+'</td></tr>';
+    const adminBtns=isAdmin&&d._key?'<td style="white-space:nowrap"><button onclick="editarRegistro(\''+d._key+'\')" style="background:none;border:none;cursor:pointer;color:var(--blue);font-size:.75rem;padding:4px" title="Editar">✎</button><button onclick="deletarRegistro(\''+d._key+'\')" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:.75rem;padding:4px;margin-left:4px" title="Excluir">✕</button></td>':'';
+    return'<tr><td class="ht-date">'+(d.data||'—')+'<br><span style="opacity:.6">'+(d.hora||'')+'</span></td><td style="font-weight:500">'+(d.empresa||'—')+'</td><td><span style="color:var(--green);font-weight:600">'+(d.fibra||'')+'</span> '+(d.cor||'')+'<br><span style="font-family:DM Mono,monospace;font-size:.68rem">'+(d.titulo||'')+' <span style="color:var(--muted);font-size:.62rem">'+(d.tipofio||'')+'</span></span></td><td style="font-size:.62rem;color:var(--muted);text-transform:capitalize">'+(d.aba||'—')+'</td><td class="ht-price">'+(d.precoFmt||'—')+'</td><td class="ht-user">'+(d.usuario||'—')+'</td>'+adminBtns+'</tr>';
   }).join('')+'</tbody></table></div>';
+}
+
+function deletarRegistro(key){
+  if(!isAdmin)return;
+  if(!confirm('Excluir este registro?'))return;
+  if(window._deletarCotacao)window._deletarCotacao(key);
+}
+
+function editarRegistro(key){
+  if(!isAdmin)return;
+  const item=(window._historicoData||[]).find(d=>d._key===key);
+  if(!item)return;
+  _editKey=key;
+  document.getElementById('modal-cot-empresa').value=item.empresa||'';
+  document.getElementById('modal-cot-fibra').value=item.fibra||'';
+  document.getElementById('modal-cot-cor').value=item.cor||'';
+  document.getElementById('modal-cot-titulo').value=item.titulo||'';
+  document.getElementById('modal-cot-aba').value=item.aba||'';
+  document.getElementById('modal-cot-preco').value=item.preco||0;
+  const sel=document.getElementById('modal-cot-tipofio');
+  const opcoes=TIPOS_FIO[item.fibra]||['Padrão'];
+  sel.innerHTML='<option value="">Selecione...</option>'+opcoes.map(o=>'<option value="'+o+'"'+(o===item.tipofio?' selected':'')+'>'+o+'</option>').join('');
+  document.getElementById('modal-cot-preco-field').style.display='';
+  document.getElementById('modal-cot-fibra').removeAttribute('readonly');
+  document.getElementById('modal-cot-fibra').parentElement.classList.remove('locked');
+  document.getElementById('modal-cot-cor').removeAttribute('readonly');
+  document.getElementById('modal-cot-cor').parentElement.classList.remove('locked');
+  document.getElementById('modalCotacao').classList.add('open');
+}
+
+
+function abrirAdicionarManual(){
+  if(!isAdmin)return;
+  _editKey=null;
+  document.getElementById('modal-cot-empresa').value='';
+  document.getElementById('modal-cot-fibra').value='';
+  document.getElementById('modal-cot-cor').value='';
+  document.getElementById('modal-cot-titulo').value='';
+  document.getElementById('modal-cot-aba').value='manual';
+  document.getElementById('modal-cot-preco').value='0';
+  // Unlock fibra/cor fields for manual entry
+  document.getElementById('modal-cot-fibra').removeAttribute('readonly');
+  document.getElementById('modal-cot-fibra').parentElement.classList.remove('locked');
+  document.getElementById('modal-cot-cor').removeAttribute('readonly');
+  document.getElementById('modal-cot-cor').parentElement.classList.remove('locked');
+  const sel=document.getElementById('modal-cot-tipofio');
+  sel.innerHTML='<option value="">Selecione...</option><option>Penteado</option><option>Cardado</option><option>Open End</option><option>Texturizado</option><option>Liso</option><option>HB</option><option>Regular</option>';
+  document.getElementById('modal-cot-preco-field').style.display='';
+  document.getElementById('modalCotacao').classList.add('open');
+  setTimeout(()=>document.getElementById('modal-cot-empresa').focus(),50);
 }
 
 function calcVendas(){const cf=g('v-custoFio');const cp=g('v-prep');const ct=vModo==='tingimento'?g('v-ting'):0;const oc=g('v-outros');const dop=g('v-despOp')/100;const jcp=g('v-jcp')/100;const recup=(cf-cf*icmsV)*PIS_COFINS_AL;const custoFioLiq=cf-recup;const descPct=cf>0?(recup/cf*100).toFixed(2):'0.00';document.getElementById('v-custoReal').textContent='R$ '+custoFioLiq.toFixed(2).replace('.',',');document.getElementById('v-custoTag').textContent='↓ '+descPct+'% desconto efetivo';const custoTotal=custoFioLiq+cp+ct+oc;const c0=cenariosVenda[0];const imp0=ICMS_FUNDOS+c0.pis+c0.cofins+c0.cred;const targetMap={'0':0,'jcp':jcp,'jcp3':jcp+0.03,'jcp5':jcp+0.05,'jcp10':jcp+0.10,'jcp25':jcp+0.25};const lo=resolverLucroParaMeta(custoTotal,imp0,dop,jcp,targetMap[targetMode]??(jcp+0.05));document.getElementById('v-lucro').value=(lo*100).toFixed(2);const div0=1-imp0-lo;const precoBase=div0>0?custoTotal/div0:0;document.getElementById('v-gridVenda').innerHTML='<div class="price-card"><div class="badge">Preço único · todas as alíquotas</div><div class="main-value"><small>R$</small> '+precoBase.toFixed(2).replace('.',',')+'</div><div class="sub">independente da alíquota de saída</div></div>';_lastPreco['vendas']={vLiq:precoBase};renderResultado('v-resultado',calcResultado(precoBase,custoTotal,imp0,dop,jcp),'vendas');}
