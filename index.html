@@ -344,7 +344,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     <div class="splash-sub">Formação de Preço</div>
   </div>
   <div class="splash-bar-wrap"><div class="splash-bar"></div></div>
-  <div class="splash-version" id="splash-version">v2.3.1</div>
+  <div class="splash-version" id="splash-version">v2.4.1</div>
 </div>
 
 <!-- LOGIN SCREEN -->
@@ -377,7 +377,7 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
     </button>
   </div>
   <div class="header-right">
-    <div class="version-badge" id="app-version">v2.3.1</div>
+    <div class="version-badge" id="app-version">v2.4.1</div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Alternar tema">
       <span class="toggle-icon" id="toggle-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></span>
     </button>
@@ -704,7 +704,10 @@ body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;fon
   <div class="modal">
     <div class="modal-title">Salvar cotação</div>
     <div class="field"><label>Empresa / Cliente</label><div class="field-row"><input type="text" id="modal-cot-empresa" placeholder="Nome da empresa"></div></div>
-    <div class="field"><label>Produto</label><div class="field-row"><input type="text" id="modal-cot-produto" placeholder="Ex: CO Branco 30/1"></div></div>
+    <div class="field"><label>Fibra</label><div class="field-row locked"><input type="text" id="modal-cot-fibra" readonly></div></div>
+    <div class="field"><label>Cor</label><div class="field-row locked"><input type="text" id="modal-cot-cor" readonly></div></div>
+    <div class="field"><label>Título (ex: 20/1, 30/1)</label><div class="field-row"><input type="text" id="modal-cot-titulo" placeholder="20/1"></div></div>
+    <div class="field"><label>Tipo do fio</label><div class="field-row"><select id="modal-cot-tipofio"><option value="">Selecione...</option></select></div></div>
     <input type="hidden" id="modal-cot-aba">
     <input type="hidden" id="modal-cot-preco">
     <div class="modal-actions">
@@ -789,7 +792,7 @@ window._salvarCotacao=(dados)=>push(historicoRef,dados).catch(e=>console.error('
 <!-- ── APP LOGIC ── -->
 
 <script>
-const APP_VERSION='v2.3.1';
+const APP_VERSION='v2.4.1';
 const ICMS_FUNDOS=0.0318,PIS_COFINS_AL=0.0925,IRPJ_RATE=0.34;
 const cenariosVenda=[{label:'ICMS 17%',pis:0.013695,cofins:0.06308,cred:0.01295},{label:'ICMS 12%',pis:0.01452,cofins:0.06688,cred:0.008325},{label:'ICMS 7%',pis:0.015345,cofins:0.07068,cred:0.0037},{label:'ICMS 4%',pis:0.01584,cofins:0.07296,cred:0.000925}];
 const cenariosServico=[{label:'Dentro do Estado',pis:0.0165,cofins:0.076,cred:0,icmsFundos:0},{label:'Fora do Estado',pis:0.01452,cofins:0.06688,cred:0.008325,icmsFundos:0.0318}];
@@ -836,14 +839,55 @@ function renderResultado(elId,r,abaName){
 }
 
 // ── SALVAR COTAÇÃO ──
-function abrirSalvarCotacao(aba){document.getElementById('modal-cot-empresa').value='';document.getElementById('modal-cot-produto').value='';document.getElementById('modal-cot-aba').value=aba||'';document.getElementById('modalCotacao').classList.add('open');setTimeout(()=>document.getElementById('modal-cot-empresa').focus(),50);}
+const TIPOS_FIO={
+  'CO':['Penteado','Cardado','Open End'],
+  'CV':['Penteado','Cardado','Open End'],
+  'CANCUN':['Penteado','Cardado','Open End'],
+  'PES':['Texturizado','Liso'],
+  'FILAMENTO':['Texturizado','Liso'],
+  'PAC':['HB','Regular'],
+  'COTONCRYL':['Penteado','Cardado'],
+};
+function getAbaFibraCor(aba){
+  let fibra='',cor='';
+  if(aba==='vendas'||aba==='tingimento'){
+    const prefix=aba==='vendas'?'v':'t';
+    const tipoEl=document.getElementById(prefix+'-tipo');
+    const corEl=document.getElementById(prefix+'-cor');
+    fibra=tipoEl?tipoEl.value:'';
+    const cores=cadastro[fibra]||[];
+    const idx=parseInt(corEl?corEl.value:'0');
+    cor=cores[idx]?cores[idx].cor:'';
+  }
+  return{fibra,cor};
+}
+function abrirSalvarCotacao(aba){
+  const{fibra,cor}=getAbaFibraCor(aba);
+  document.getElementById('modal-cot-empresa').value='';
+  document.getElementById('modal-cot-fibra').value=fibra||'—';
+  document.getElementById('modal-cot-cor').value=cor||'—';
+  document.getElementById('modal-cot-titulo').value='';
+  document.getElementById('modal-cot-aba').value=aba||'';
+  // Popula dropdown tipo do fio
+  const sel=document.getElementById('modal-cot-tipofio');
+  const opcoes=TIPOS_FIO[fibra]||['Padrão'];
+  sel.innerHTML='<option value="">Selecione...</option>'+opcoes.map(o=>'<option value="'+o+'">'+o+'</option>').join('');
+  document.getElementById('modalCotacao').classList.add('open');
+  setTimeout(()=>document.getElementById('modal-cot-empresa').focus(),50);
+}
 function confirmarSalvarCotacao(){
   const empresa=document.getElementById('modal-cot-empresa').value.trim();
-  const produto=document.getElementById('modal-cot-produto').value.trim();
+  const fibra=document.getElementById('modal-cot-fibra').value.trim();
+  const cor=document.getElementById('modal-cot-cor').value.trim();
+  const titulo=document.getElementById('modal-cot-titulo').value.trim();
+  const tipofio=document.getElementById('modal-cot-tipofio').value;
   const aba=document.getElementById('modal-cot-aba').value;
-  if(!empresa||!produto){alert('Preencha empresa e produto.');return;}
+  if(!empresa){alert('Preencha a empresa.');return;}
+  if(!titulo){alert('Preencha o título (ex: 20/1).');return;}
+  if(!tipofio){alert('Selecione o tipo do fio.');return;}
   const info=_lastPreco[aba]||{};const precoVal=info.vLiq||0;const now=new Date();
-  const dados={timestamp:now.getTime(),data:now.toLocaleDateString('pt-BR'),hora:now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),usuario:currentUser||'—',empresa:empresa,produto:produto,aba:aba,preco:precoVal,precoFmt:'R$ '+precoVal.toFixed(2).replace('.',',')};
+  const produto=fibra+' '+cor+' '+titulo+' '+tipofio;
+  const dados={timestamp:now.getTime(),data:now.toLocaleDateString('pt-BR'),hora:now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),usuario:currentUser||'—',empresa:empresa,fibra:fibra,cor:cor,titulo:titulo,tipofio:tipofio,produto:produto,aba:aba,preco:precoVal,precoFmt:'R$ '+precoVal.toFixed(2).replace('.',',')};
   if(window._salvarCotacao){window._salvarCotacao(dados);}
   fecharModal('modalCotacao');
 }
@@ -853,9 +897,12 @@ function renderHistorico(){
   const area=document.getElementById('histArea');if(!area)return;
   const data=window._historicoData||[];
   const search=(document.getElementById('hist-search')?.value||'').toLowerCase();
-  const filtered=search?data.filter(d=>(d.empresa||'').toLowerCase().includes(search)||(d.produto||'').toLowerCase().includes(search)):data;
+  const filtered=search?data.filter(d=>(d.empresa||'').toLowerCase().includes(search)||(d.produto||'').toLowerCase().includes(search)||(d.fibra||'').toLowerCase().includes(search)):data;
   if(!filtered.length){area.innerHTML='<div class="hist-empty">Nenhuma cotação salva ainda.</div>';return;}
-  area.innerHTML='<table class="hist-table"><thead><tr><th>Data</th><th>Empresa</th><th>Produto</th><th>Aba</th><th>Preço</th><th>Usuário</th></tr></thead><tbody>'+filtered.map(d=>'<tr><td class="ht-date">'+(d.data||'—')+' '+(d.hora||'')+'</td><td>'+(d.empresa||'—')+'</td><td>'+(d.produto||'—')+'</td><td style="font-size:.65rem;color:var(--muted)">'+(d.aba||'—')+'</td><td class="ht-price">'+(d.precoFmt||'—')+'</td><td class="ht-user">'+(d.usuario||'—')+'</td></tr>').join('')+'</tbody></table>';
+  area.innerHTML='<div style="overflow-x:auto"><table class="hist-table"><thead><tr><th>Data</th><th>Empresa</th><th>Produto</th><th>Aba</th><th>Preço</th><th>Usuário</th></tr></thead><tbody>'+filtered.map(d=>{
+    const prod=d.produto||(d.fibra?d.fibra+' '+d.cor+' '+(d.titulo||'')+' '+(d.tipofio||''):'—');
+    return'<tr><td class="ht-date">'+(d.data||'—')+'<br><span style="opacity:.6">'+(d.hora||'')+'</span></td><td style="font-weight:500">'+(d.empresa||'—')+'</td><td><span style="color:var(--green);font-weight:600">'+(d.fibra||'')+'</span> '+(d.cor||'')+'<br><span style="font-family:DM Mono,monospace;font-size:.68rem">'+(d.titulo||'')+' <span style="color:var(--muted);font-size:.62rem">'+(d.tipofio||'')+'</span></span></td><td style="font-size:.62rem;color:var(--muted);text-transform:capitalize">'+(d.aba||'—')+'</td><td class="ht-price">'+(d.precoFmt||'—')+'</td><td class="ht-user">'+(d.usuario||'—')+'</td></tr>';
+  }).join('')+'</tbody></table></div>';
 }
 
 function calcVendas(){const cf=g('v-custoFio');const cp=g('v-prep');const ct=vModo==='tingimento'?g('v-ting'):0;const oc=g('v-outros');const dop=g('v-despOp')/100;const jcp=g('v-jcp')/100;const recup=(cf-cf*icmsV)*PIS_COFINS_AL;const custoFioLiq=cf-recup;const descPct=cf>0?(recup/cf*100).toFixed(2):'0.00';document.getElementById('v-custoReal').textContent='R$ '+custoFioLiq.toFixed(2).replace('.',',');document.getElementById('v-custoTag').textContent='↓ '+descPct+'% desconto efetivo';const custoTotal=custoFioLiq+cp+ct+oc;const c0=cenariosVenda[0];const imp0=ICMS_FUNDOS+c0.pis+c0.cofins+c0.cred;const targetMap={'0':0,'jcp':jcp,'jcp3':jcp+0.03,'jcp5':jcp+0.05,'jcp10':jcp+0.10,'jcp25':jcp+0.25};const lo=resolverLucroParaMeta(custoTotal,imp0,dop,jcp,targetMap[targetMode]??(jcp+0.05));document.getElementById('v-lucro').value=(lo*100).toFixed(2);const div0=1-imp0-lo;const precoBase=div0>0?custoTotal/div0:0;document.getElementById('v-gridVenda').innerHTML='<div class="price-card"><div class="badge">Preço único · todas as alíquotas</div><div class="main-value"><small>R$</small> '+precoBase.toFixed(2).replace('.',',')+'</div><div class="sub">independente da alíquota de saída</div></div>';_lastPreco['vendas']={vLiq:precoBase};renderResultado('v-resultado',calcResultado(precoBase,custoTotal,imp0,dop,jcp),'vendas');}
